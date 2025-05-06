@@ -92,7 +92,7 @@ const router=useRouter()
         setSuccess(true);
         setInputValue('');
         setSubjects([]);
-        // router.push('/')
+        router.push('/')
         toast.success('Tutor info updated successfully!', {
           position: "top-right",
           autoClose: 5000,

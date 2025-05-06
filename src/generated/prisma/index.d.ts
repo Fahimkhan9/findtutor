@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type Tutor = $Result.DefaultSelection<Prisma.$TutorPayload>
+/**
+ * Model Tuition
+ * 
+ */
+export type Tuition = $Result.DefaultSelection<Prisma.$TuitionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get tutor(): Prisma.TutorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tuition`: Exposes CRUD operations for the **Tuition** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tuitions
+    * const tuitions = await prisma.tuition.findMany()
+    * ```
+    */
+  get tuition(): Prisma.TuitionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Tutor: 'Tutor'
+    Tutor: 'Tutor',
+    Tuition: 'Tuition'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tutor"
+      modelProps: "tutor" | "tuition"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.TutorCountArgs<ExtArgs>
             result: $Utils.Optional<TutorCountAggregateOutputType> | number
+          }
+        }
+      }
+      Tuition: {
+        payload: Prisma.$TuitionPayload<ExtArgs>
+        fields: Prisma.TuitionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TuitionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TuitionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>
+          }
+          findFirst: {
+            args: Prisma.TuitionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TuitionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>
+          }
+          findMany: {
+            args: Prisma.TuitionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>[]
+          }
+          create: {
+            args: Prisma.TuitionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>
+          }
+          createMany: {
+            args: Prisma.TuitionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TuitionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>[]
+          }
+          delete: {
+            args: Prisma.TuitionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>
+          }
+          update: {
+            args: Prisma.TuitionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>
+          }
+          deleteMany: {
+            args: Prisma.TuitionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TuitionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TuitionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>[]
+          }
+          upsert: {
+            args: Prisma.TuitionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionPayload>
+          }
+          aggregate: {
+            args: Prisma.TuitionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTuition>
+          }
+          groupBy: {
+            args: Prisma.TuitionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TuitionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TuitionCountArgs<ExtArgs>
+            result: $Utils.Optional<TuitionCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     tutor?: TutorOmit
+    tuition?: TuitionOmit
   }
 
   /* Types for Logging */
@@ -1964,6 +2055,1087 @@ export namespace Prisma {
 
 
   /**
+   * Model Tuition
+   */
+
+  export type AggregateTuition = {
+    _count: TuitionCountAggregateOutputType | null
+    _avg: TuitionAvgAggregateOutputType | null
+    _sum: TuitionSumAggregateOutputType | null
+    _min: TuitionMinAggregateOutputType | null
+    _max: TuitionMaxAggregateOutputType | null
+  }
+
+  export type TuitionAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TuitionSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TuitionMinAggregateOutputType = {
+    id: number | null
+    description: string | null
+    district: string | null
+    location: string | null
+    year: string | null
+    subjects: string | null
+    salary: string | null
+    mode: string | null
+    postedById: string | null
+  }
+
+  export type TuitionMaxAggregateOutputType = {
+    id: number | null
+    description: string | null
+    district: string | null
+    location: string | null
+    year: string | null
+    subjects: string | null
+    salary: string | null
+    mode: string | null
+    postedById: string | null
+  }
+
+  export type TuitionCountAggregateOutputType = {
+    id: number
+    description: number
+    district: number
+    location: number
+    year: number
+    subjects: number
+    salary: number
+    mode: number
+    postedById: number
+    _all: number
+  }
+
+
+  export type TuitionAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type TuitionSumAggregateInputType = {
+    id?: true
+  }
+
+  export type TuitionMinAggregateInputType = {
+    id?: true
+    description?: true
+    district?: true
+    location?: true
+    year?: true
+    subjects?: true
+    salary?: true
+    mode?: true
+    postedById?: true
+  }
+
+  export type TuitionMaxAggregateInputType = {
+    id?: true
+    description?: true
+    district?: true
+    location?: true
+    year?: true
+    subjects?: true
+    salary?: true
+    mode?: true
+    postedById?: true
+  }
+
+  export type TuitionCountAggregateInputType = {
+    id?: true
+    description?: true
+    district?: true
+    location?: true
+    year?: true
+    subjects?: true
+    salary?: true
+    mode?: true
+    postedById?: true
+    _all?: true
+  }
+
+  export type TuitionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tuition to aggregate.
+     */
+    where?: TuitionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tuitions to fetch.
+     */
+    orderBy?: TuitionOrderByWithRelationInput | TuitionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TuitionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tuitions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tuitions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Tuitions
+    **/
+    _count?: true | TuitionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TuitionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TuitionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TuitionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TuitionMaxAggregateInputType
+  }
+
+  export type GetTuitionAggregateType<T extends TuitionAggregateArgs> = {
+        [P in keyof T & keyof AggregateTuition]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTuition[P]>
+      : GetScalarType<T[P], AggregateTuition[P]>
+  }
+
+
+
+
+  export type TuitionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TuitionWhereInput
+    orderBy?: TuitionOrderByWithAggregationInput | TuitionOrderByWithAggregationInput[]
+    by: TuitionScalarFieldEnum[] | TuitionScalarFieldEnum
+    having?: TuitionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TuitionCountAggregateInputType | true
+    _avg?: TuitionAvgAggregateInputType
+    _sum?: TuitionSumAggregateInputType
+    _min?: TuitionMinAggregateInputType
+    _max?: TuitionMaxAggregateInputType
+  }
+
+  export type TuitionGroupByOutputType = {
+    id: number
+    description: string
+    district: string
+    location: string
+    year: string
+    subjects: string
+    salary: string
+    mode: string
+    postedById: string
+    _count: TuitionCountAggregateOutputType | null
+    _avg: TuitionAvgAggregateOutputType | null
+    _sum: TuitionSumAggregateOutputType | null
+    _min: TuitionMinAggregateOutputType | null
+    _max: TuitionMaxAggregateOutputType | null
+  }
+
+  type GetTuitionGroupByPayload<T extends TuitionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TuitionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TuitionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TuitionGroupByOutputType[P]>
+            : GetScalarType<T[P], TuitionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TuitionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    district?: boolean
+    location?: boolean
+    year?: boolean
+    subjects?: boolean
+    salary?: boolean
+    mode?: boolean
+    postedById?: boolean
+  }, ExtArgs["result"]["tuition"]>
+
+  export type TuitionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    district?: boolean
+    location?: boolean
+    year?: boolean
+    subjects?: boolean
+    salary?: boolean
+    mode?: boolean
+    postedById?: boolean
+  }, ExtArgs["result"]["tuition"]>
+
+  export type TuitionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    district?: boolean
+    location?: boolean
+    year?: boolean
+    subjects?: boolean
+    salary?: boolean
+    mode?: boolean
+    postedById?: boolean
+  }, ExtArgs["result"]["tuition"]>
+
+  export type TuitionSelectScalar = {
+    id?: boolean
+    description?: boolean
+    district?: boolean
+    location?: boolean
+    year?: boolean
+    subjects?: boolean
+    salary?: boolean
+    mode?: boolean
+    postedById?: boolean
+  }
+
+  export type TuitionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "description" | "district" | "location" | "year" | "subjects" | "salary" | "mode" | "postedById", ExtArgs["result"]["tuition"]>
+
+  export type $TuitionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tuition"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      description: string
+      district: string
+      location: string
+      year: string
+      subjects: string
+      salary: string
+      mode: string
+      postedById: string
+    }, ExtArgs["result"]["tuition"]>
+    composites: {}
+  }
+
+  type TuitionGetPayload<S extends boolean | null | undefined | TuitionDefaultArgs> = $Result.GetResult<Prisma.$TuitionPayload, S>
+
+  type TuitionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TuitionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TuitionCountAggregateInputType | true
+    }
+
+  export interface TuitionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tuition'], meta: { name: 'Tuition' } }
+    /**
+     * Find zero or one Tuition that matches the filter.
+     * @param {TuitionFindUniqueArgs} args - Arguments to find a Tuition
+     * @example
+     * // Get one Tuition
+     * const tuition = await prisma.tuition.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TuitionFindUniqueArgs>(args: SelectSubset<T, TuitionFindUniqueArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tuition that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TuitionFindUniqueOrThrowArgs} args - Arguments to find a Tuition
+     * @example
+     * // Get one Tuition
+     * const tuition = await prisma.tuition.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TuitionFindUniqueOrThrowArgs>(args: SelectSubset<T, TuitionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tuition that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionFindFirstArgs} args - Arguments to find a Tuition
+     * @example
+     * // Get one Tuition
+     * const tuition = await prisma.tuition.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TuitionFindFirstArgs>(args?: SelectSubset<T, TuitionFindFirstArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tuition that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionFindFirstOrThrowArgs} args - Arguments to find a Tuition
+     * @example
+     * // Get one Tuition
+     * const tuition = await prisma.tuition.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TuitionFindFirstOrThrowArgs>(args?: SelectSubset<T, TuitionFindFirstOrThrowArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Tuitions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tuitions
+     * const tuitions = await prisma.tuition.findMany()
+     * 
+     * // Get first 10 Tuitions
+     * const tuitions = await prisma.tuition.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tuitionWithIdOnly = await prisma.tuition.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TuitionFindManyArgs>(args?: SelectSubset<T, TuitionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tuition.
+     * @param {TuitionCreateArgs} args - Arguments to create a Tuition.
+     * @example
+     * // Create one Tuition
+     * const Tuition = await prisma.tuition.create({
+     *   data: {
+     *     // ... data to create a Tuition
+     *   }
+     * })
+     * 
+     */
+    create<T extends TuitionCreateArgs>(args: SelectSubset<T, TuitionCreateArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Tuitions.
+     * @param {TuitionCreateManyArgs} args - Arguments to create many Tuitions.
+     * @example
+     * // Create many Tuitions
+     * const tuition = await prisma.tuition.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TuitionCreateManyArgs>(args?: SelectSubset<T, TuitionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Tuitions and returns the data saved in the database.
+     * @param {TuitionCreateManyAndReturnArgs} args - Arguments to create many Tuitions.
+     * @example
+     * // Create many Tuitions
+     * const tuition = await prisma.tuition.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Tuitions and only return the `id`
+     * const tuitionWithIdOnly = await prisma.tuition.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TuitionCreateManyAndReturnArgs>(args?: SelectSubset<T, TuitionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Tuition.
+     * @param {TuitionDeleteArgs} args - Arguments to delete one Tuition.
+     * @example
+     * // Delete one Tuition
+     * const Tuition = await prisma.tuition.delete({
+     *   where: {
+     *     // ... filter to delete one Tuition
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TuitionDeleteArgs>(args: SelectSubset<T, TuitionDeleteArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tuition.
+     * @param {TuitionUpdateArgs} args - Arguments to update one Tuition.
+     * @example
+     * // Update one Tuition
+     * const tuition = await prisma.tuition.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TuitionUpdateArgs>(args: SelectSubset<T, TuitionUpdateArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Tuitions.
+     * @param {TuitionDeleteManyArgs} args - Arguments to filter Tuitions to delete.
+     * @example
+     * // Delete a few Tuitions
+     * const { count } = await prisma.tuition.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TuitionDeleteManyArgs>(args?: SelectSubset<T, TuitionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tuitions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tuitions
+     * const tuition = await prisma.tuition.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TuitionUpdateManyArgs>(args: SelectSubset<T, TuitionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tuitions and returns the data updated in the database.
+     * @param {TuitionUpdateManyAndReturnArgs} args - Arguments to update many Tuitions.
+     * @example
+     * // Update many Tuitions
+     * const tuition = await prisma.tuition.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Tuitions and only return the `id`
+     * const tuitionWithIdOnly = await prisma.tuition.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TuitionUpdateManyAndReturnArgs>(args: SelectSubset<T, TuitionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Tuition.
+     * @param {TuitionUpsertArgs} args - Arguments to update or create a Tuition.
+     * @example
+     * // Update or create a Tuition
+     * const tuition = await prisma.tuition.upsert({
+     *   create: {
+     *     // ... data to create a Tuition
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tuition we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TuitionUpsertArgs>(args: SelectSubset<T, TuitionUpsertArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Tuitions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionCountArgs} args - Arguments to filter Tuitions to count.
+     * @example
+     * // Count the number of Tuitions
+     * const count = await prisma.tuition.count({
+     *   where: {
+     *     // ... the filter for the Tuitions we want to count
+     *   }
+     * })
+    **/
+    count<T extends TuitionCountArgs>(
+      args?: Subset<T, TuitionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TuitionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tuition.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TuitionAggregateArgs>(args: Subset<T, TuitionAggregateArgs>): Prisma.PrismaPromise<GetTuitionAggregateType<T>>
+
+    /**
+     * Group by Tuition.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TuitionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TuitionGroupByArgs['orderBy'] }
+        : { orderBy?: TuitionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TuitionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTuitionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tuition model
+   */
+  readonly fields: TuitionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tuition.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TuitionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tuition model
+   */
+  interface TuitionFieldRefs {
+    readonly id: FieldRef<"Tuition", 'Int'>
+    readonly description: FieldRef<"Tuition", 'String'>
+    readonly district: FieldRef<"Tuition", 'String'>
+    readonly location: FieldRef<"Tuition", 'String'>
+    readonly year: FieldRef<"Tuition", 'String'>
+    readonly subjects: FieldRef<"Tuition", 'String'>
+    readonly salary: FieldRef<"Tuition", 'String'>
+    readonly mode: FieldRef<"Tuition", 'String'>
+    readonly postedById: FieldRef<"Tuition", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tuition findUnique
+   */
+  export type TuitionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Filter, which Tuition to fetch.
+     */
+    where: TuitionWhereUniqueInput
+  }
+
+  /**
+   * Tuition findUniqueOrThrow
+   */
+  export type TuitionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Filter, which Tuition to fetch.
+     */
+    where: TuitionWhereUniqueInput
+  }
+
+  /**
+   * Tuition findFirst
+   */
+  export type TuitionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Filter, which Tuition to fetch.
+     */
+    where?: TuitionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tuitions to fetch.
+     */
+    orderBy?: TuitionOrderByWithRelationInput | TuitionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tuitions.
+     */
+    cursor?: TuitionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tuitions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tuitions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tuitions.
+     */
+    distinct?: TuitionScalarFieldEnum | TuitionScalarFieldEnum[]
+  }
+
+  /**
+   * Tuition findFirstOrThrow
+   */
+  export type TuitionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Filter, which Tuition to fetch.
+     */
+    where?: TuitionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tuitions to fetch.
+     */
+    orderBy?: TuitionOrderByWithRelationInput | TuitionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tuitions.
+     */
+    cursor?: TuitionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tuitions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tuitions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tuitions.
+     */
+    distinct?: TuitionScalarFieldEnum | TuitionScalarFieldEnum[]
+  }
+
+  /**
+   * Tuition findMany
+   */
+  export type TuitionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Filter, which Tuitions to fetch.
+     */
+    where?: TuitionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tuitions to fetch.
+     */
+    orderBy?: TuitionOrderByWithRelationInput | TuitionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Tuitions.
+     */
+    cursor?: TuitionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tuitions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tuitions.
+     */
+    skip?: number
+    distinct?: TuitionScalarFieldEnum | TuitionScalarFieldEnum[]
+  }
+
+  /**
+   * Tuition create
+   */
+  export type TuitionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Tuition.
+     */
+    data: XOR<TuitionCreateInput, TuitionUncheckedCreateInput>
+  }
+
+  /**
+   * Tuition createMany
+   */
+  export type TuitionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Tuitions.
+     */
+    data: TuitionCreateManyInput | TuitionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tuition createManyAndReturn
+   */
+  export type TuitionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Tuitions.
+     */
+    data: TuitionCreateManyInput | TuitionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tuition update
+   */
+  export type TuitionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Tuition.
+     */
+    data: XOR<TuitionUpdateInput, TuitionUncheckedUpdateInput>
+    /**
+     * Choose, which Tuition to update.
+     */
+    where: TuitionWhereUniqueInput
+  }
+
+  /**
+   * Tuition updateMany
+   */
+  export type TuitionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Tuitions.
+     */
+    data: XOR<TuitionUpdateManyMutationInput, TuitionUncheckedUpdateManyInput>
+    /**
+     * Filter which Tuitions to update
+     */
+    where?: TuitionWhereInput
+    /**
+     * Limit how many Tuitions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tuition updateManyAndReturn
+   */
+  export type TuitionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * The data used to update Tuitions.
+     */
+    data: XOR<TuitionUpdateManyMutationInput, TuitionUncheckedUpdateManyInput>
+    /**
+     * Filter which Tuitions to update
+     */
+    where?: TuitionWhereInput
+    /**
+     * Limit how many Tuitions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tuition upsert
+   */
+  export type TuitionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Tuition to update in case it exists.
+     */
+    where: TuitionWhereUniqueInput
+    /**
+     * In case the Tuition found by the `where` argument doesn't exist, create a new Tuition with this data.
+     */
+    create: XOR<TuitionCreateInput, TuitionUncheckedCreateInput>
+    /**
+     * In case the Tuition was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TuitionUpdateInput, TuitionUncheckedUpdateInput>
+  }
+
+  /**
+   * Tuition delete
+   */
+  export type TuitionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Filter which Tuition to delete.
+     */
+    where: TuitionWhereUniqueInput
+  }
+
+  /**
+   * Tuition deleteMany
+   */
+  export type TuitionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tuitions to delete
+     */
+    where?: TuitionWhereInput
+    /**
+     * Limit how many Tuitions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tuition without action
+   */
+  export type TuitionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tuition
+     */
+    select?: TuitionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tuition
+     */
+    omit?: TuitionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1991,6 +3163,21 @@ export namespace Prisma {
   };
 
   export type TutorScalarFieldEnum = (typeof TutorScalarFieldEnum)[keyof typeof TutorScalarFieldEnum]
+
+
+  export const TuitionScalarFieldEnum: {
+    id: 'id',
+    description: 'description',
+    district: 'district',
+    location: 'location',
+    year: 'year',
+    subjects: 'subjects',
+    salary: 'salary',
+    mode: 'mode',
+    postedById: 'postedById'
+  };
+
+  export type TuitionScalarFieldEnum = (typeof TuitionScalarFieldEnum)[keyof typeof TuitionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2138,6 +3325,80 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Tutor"> | string
   }
 
+  export type TuitionWhereInput = {
+    AND?: TuitionWhereInput | TuitionWhereInput[]
+    OR?: TuitionWhereInput[]
+    NOT?: TuitionWhereInput | TuitionWhereInput[]
+    id?: IntFilter<"Tuition"> | number
+    description?: StringFilter<"Tuition"> | string
+    district?: StringFilter<"Tuition"> | string
+    location?: StringFilter<"Tuition"> | string
+    year?: StringFilter<"Tuition"> | string
+    subjects?: StringFilter<"Tuition"> | string
+    salary?: StringFilter<"Tuition"> | string
+    mode?: StringFilter<"Tuition"> | string
+    postedById?: StringFilter<"Tuition"> | string
+  }
+
+  export type TuitionOrderByWithRelationInput = {
+    id?: SortOrder
+    description?: SortOrder
+    district?: SortOrder
+    location?: SortOrder
+    year?: SortOrder
+    subjects?: SortOrder
+    salary?: SortOrder
+    mode?: SortOrder
+    postedById?: SortOrder
+  }
+
+  export type TuitionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: TuitionWhereInput | TuitionWhereInput[]
+    OR?: TuitionWhereInput[]
+    NOT?: TuitionWhereInput | TuitionWhereInput[]
+    description?: StringFilter<"Tuition"> | string
+    district?: StringFilter<"Tuition"> | string
+    location?: StringFilter<"Tuition"> | string
+    year?: StringFilter<"Tuition"> | string
+    subjects?: StringFilter<"Tuition"> | string
+    salary?: StringFilter<"Tuition"> | string
+    mode?: StringFilter<"Tuition"> | string
+    postedById?: StringFilter<"Tuition"> | string
+  }, "id">
+
+  export type TuitionOrderByWithAggregationInput = {
+    id?: SortOrder
+    description?: SortOrder
+    district?: SortOrder
+    location?: SortOrder
+    year?: SortOrder
+    subjects?: SortOrder
+    salary?: SortOrder
+    mode?: SortOrder
+    postedById?: SortOrder
+    _count?: TuitionCountOrderByAggregateInput
+    _avg?: TuitionAvgOrderByAggregateInput
+    _max?: TuitionMaxOrderByAggregateInput
+    _min?: TuitionMinOrderByAggregateInput
+    _sum?: TuitionSumOrderByAggregateInput
+  }
+
+  export type TuitionScalarWhereWithAggregatesInput = {
+    AND?: TuitionScalarWhereWithAggregatesInput | TuitionScalarWhereWithAggregatesInput[]
+    OR?: TuitionScalarWhereWithAggregatesInput[]
+    NOT?: TuitionScalarWhereWithAggregatesInput | TuitionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Tuition"> | number
+    description?: StringWithAggregatesFilter<"Tuition"> | string
+    district?: StringWithAggregatesFilter<"Tuition"> | string
+    location?: StringWithAggregatesFilter<"Tuition"> | string
+    year?: StringWithAggregatesFilter<"Tuition"> | string
+    subjects?: StringWithAggregatesFilter<"Tuition"> | string
+    salary?: StringWithAggregatesFilter<"Tuition"> | string
+    mode?: StringWithAggregatesFilter<"Tuition"> | string
+    postedById?: StringWithAggregatesFilter<"Tuition"> | string
+  }
+
   export type TutorCreateInput = {
     institution: string
     subjects: string
@@ -2224,6 +3485,87 @@ export namespace Prisma {
     sampleTeachingVideo?: StringFieldUpdateOperationsInput | string
     subjectToTeach?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TuitionCreateInput = {
+    description: string
+    district: string
+    location: string
+    year: string
+    subjects: string
+    salary: string
+    mode: string
+    postedById: string
+  }
+
+  export type TuitionUncheckedCreateInput = {
+    id?: number
+    description: string
+    district: string
+    location: string
+    year: string
+    subjects: string
+    salary: string
+    mode: string
+    postedById: string
+  }
+
+  export type TuitionUpdateInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
+    subjects?: StringFieldUpdateOperationsInput | string
+    salary?: StringFieldUpdateOperationsInput | string
+    mode?: StringFieldUpdateOperationsInput | string
+    postedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TuitionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
+    subjects?: StringFieldUpdateOperationsInput | string
+    salary?: StringFieldUpdateOperationsInput | string
+    mode?: StringFieldUpdateOperationsInput | string
+    postedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TuitionCreateManyInput = {
+    id?: number
+    description: string
+    district: string
+    location: string
+    year: string
+    subjects: string
+    salary: string
+    mode: string
+    postedById: string
+  }
+
+  export type TuitionUpdateManyMutationInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
+    subjects?: StringFieldUpdateOperationsInput | string
+    salary?: StringFieldUpdateOperationsInput | string
+    mode?: StringFieldUpdateOperationsInput | string
+    postedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TuitionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
+    subjects?: StringFieldUpdateOperationsInput | string
+    salary?: StringFieldUpdateOperationsInput | string
+    mode?: StringFieldUpdateOperationsInput | string
+    postedById?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2331,6 +3673,50 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type TuitionCountOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    district?: SortOrder
+    location?: SortOrder
+    year?: SortOrder
+    subjects?: SortOrder
+    salary?: SortOrder
+    mode?: SortOrder
+    postedById?: SortOrder
+  }
+
+  export type TuitionAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type TuitionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    district?: SortOrder
+    location?: SortOrder
+    year?: SortOrder
+    subjects?: SortOrder
+    salary?: SortOrder
+    mode?: SortOrder
+    postedById?: SortOrder
+  }
+
+  export type TuitionMinOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    district?: SortOrder
+    location?: SortOrder
+    year?: SortOrder
+    subjects?: SortOrder
+    salary?: SortOrder
+    mode?: SortOrder
+    postedById?: SortOrder
+  }
+
+  export type TuitionSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {

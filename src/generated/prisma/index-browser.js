@@ -133,6 +133,18 @@ exports.Prisma.TutorScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.TuitionScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  district: 'district',
+  location: 'location',
+  year: 'year',
+  subjects: 'subjects',
+  salary: 'salary',
+  mode: 'mode',
+  postedById: 'postedById'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -145,7 +157,8 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Tutor: 'Tutor'
+  Tutor: 'Tutor',
+  Tuition: 'Tuition'
 };
 
 /**

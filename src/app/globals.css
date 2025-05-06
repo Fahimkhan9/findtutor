@@ -2,3 +2,13 @@
 @plugin "daisyui"{
   themes: nord,dim --default --prefersdark;
 }
+/* Add to global CSS if needed */
+.react-select-container {
+  --tw-ring-color: transparent;
+}
+.react-select__control {
+  @apply border border-base-300 rounded-lg p-1 shadow-sm;
+}
+.react-select__menu {
+  @apply bg-base-100 border border-base-300 shadow-lg z-50;
+}
