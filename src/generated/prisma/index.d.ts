@@ -23,6 +23,11 @@ export type Tutor = $Result.DefaultSelection<Prisma.$TutorPayload>
  * 
  */
 export type Tuition = $Result.DefaultSelection<Prisma.$TuitionPayload>
+/**
+ * Model TuitionApplication
+ * 
+ */
+export type TuitionApplication = $Result.DefaultSelection<Prisma.$TuitionApplicationPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -168,6 +173,16 @@ export class PrismaClient<
     * ```
     */
   get tuition(): Prisma.TuitionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tuitionApplication`: Exposes CRUD operations for the **TuitionApplication** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TuitionApplications
+    * const tuitionApplications = await prisma.tuitionApplication.findMany()
+    * ```
+    */
+  get tuitionApplication(): Prisma.TuitionApplicationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -609,7 +624,8 @@ export namespace Prisma {
 
   export const ModelName: {
     Tutor: 'Tutor',
-    Tuition: 'Tuition'
+    Tuition: 'Tuition',
+    TuitionApplication: 'TuitionApplication'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -628,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tutor" | "tuition"
+      modelProps: "tutor" | "tuition" | "tuitionApplication"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -780,6 +796,80 @@ export namespace Prisma {
           }
         }
       }
+      TuitionApplication: {
+        payload: Prisma.$TuitionApplicationPayload<ExtArgs>
+        fields: Prisma.TuitionApplicationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TuitionApplicationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TuitionApplicationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>
+          }
+          findFirst: {
+            args: Prisma.TuitionApplicationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TuitionApplicationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>
+          }
+          findMany: {
+            args: Prisma.TuitionApplicationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>[]
+          }
+          create: {
+            args: Prisma.TuitionApplicationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>
+          }
+          createMany: {
+            args: Prisma.TuitionApplicationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TuitionApplicationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>[]
+          }
+          delete: {
+            args: Prisma.TuitionApplicationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>
+          }
+          update: {
+            args: Prisma.TuitionApplicationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>
+          }
+          deleteMany: {
+            args: Prisma.TuitionApplicationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TuitionApplicationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TuitionApplicationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>[]
+          }
+          upsert: {
+            args: Prisma.TuitionApplicationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TuitionApplicationPayload>
+          }
+          aggregate: {
+            args: Prisma.TuitionApplicationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTuitionApplication>
+          }
+          groupBy: {
+            args: Prisma.TuitionApplicationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TuitionApplicationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TuitionApplicationCountArgs<ExtArgs>
+            result: $Utils.Optional<TuitionApplicationCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -866,6 +956,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     tutor?: TutorOmit
     tuition?: TuitionOmit
+    tuitionApplication?: TuitionApplicationOmit
   }
 
   /* Types for Logging */
@@ -954,6 +1045,67 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type TutorCountOutputType
+   */
+
+  export type TutorCountOutputType = {
+    applications: number
+  }
+
+  export type TutorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applications?: boolean | TutorCountOutputTypeCountApplicationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TutorCountOutputType without action
+   */
+  export type TutorCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TutorCountOutputType
+     */
+    select?: TutorCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TutorCountOutputType without action
+   */
+  export type TutorCountOutputTypeCountApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TuitionApplicationWhereInput
+  }
+
+
+  /**
+   * Count Type TuitionCountOutputType
+   */
+
+  export type TuitionCountOutputType = {
+    applications: number
+  }
+
+  export type TuitionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applications?: boolean | TuitionCountOutputTypeCountApplicationsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TuitionCountOutputType without action
+   */
+  export type TuitionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionCountOutputType
+     */
+    select?: TuitionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TuitionCountOutputType without action
+   */
+  export type TuitionCountOutputTypeCountApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TuitionApplicationWhereInput
+  }
 
 
   /**
@@ -1198,6 +1350,8 @@ export namespace Prisma {
     sampleTeachingVideo?: boolean
     subjectToTeach?: boolean
     userId?: boolean
+    applications?: boolean | Tutor$applicationsArgs<ExtArgs>
+    _count?: boolean | TutorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tutor"]>
 
   export type TutorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1240,10 +1394,18 @@ export namespace Prisma {
   }
 
   export type TutorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "institution" | "subjects" | "year" | "name" | "email" | "location" | "sampleTeachingVideo" | "subjectToTeach" | "userId", ExtArgs["result"]["tutor"]>
+  export type TutorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applications?: boolean | Tutor$applicationsArgs<ExtArgs>
+    _count?: boolean | TutorCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TutorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TutorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $TutorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Tutor"
-    objects: {}
+    objects: {
+      applications: Prisma.$TuitionApplicationPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       institution: string
@@ -1649,6 +1811,7 @@ export namespace Prisma {
    */
   export interface Prisma__TutorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    applications<T extends Tutor$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, Tutor$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1705,6 +1868,10 @@ export namespace Prisma {
      */
     omit?: TutorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
+    /**
      * Filter, which Tutor to fetch.
      */
     where: TutorWhereUniqueInput
@@ -1723,6 +1890,10 @@ export namespace Prisma {
      */
     omit?: TutorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
+    /**
      * Filter, which Tutor to fetch.
      */
     where: TutorWhereUniqueInput
@@ -1740,6 +1911,10 @@ export namespace Prisma {
      * Omit specific fields from the Tutor
      */
     omit?: TutorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
     /**
      * Filter, which Tutor to fetch.
      */
@@ -1789,6 +1964,10 @@ export namespace Prisma {
      */
     omit?: TutorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
+    /**
      * Filter, which Tutor to fetch.
      */
     where?: TutorWhereInput
@@ -1837,6 +2016,10 @@ export namespace Prisma {
      */
     omit?: TutorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
+    /**
      * Filter, which Tutors to fetch.
      */
     where?: TutorWhereInput
@@ -1879,6 +2062,10 @@ export namespace Prisma {
      * Omit specific fields from the Tutor
      */
     omit?: TutorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
     /**
      * The data needed to create a Tutor.
      */
@@ -1927,6 +2114,10 @@ export namespace Prisma {
      * Omit specific fields from the Tutor
      */
     omit?: TutorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
     /**
      * The data needed to update a Tutor.
      */
@@ -1994,6 +2185,10 @@ export namespace Prisma {
      */
     omit?: TutorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
+    /**
      * The filter to search for the Tutor to update in case it exists.
      */
     where: TutorWhereUniqueInput
@@ -2020,6 +2215,10 @@ export namespace Prisma {
      */
     omit?: TutorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
+    /**
      * Filter which Tutor to delete.
      */
     where: TutorWhereUniqueInput
@@ -2040,6 +2239,30 @@ export namespace Prisma {
   }
 
   /**
+   * Tutor.applications
+   */
+  export type Tutor$applicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    where?: TuitionApplicationWhereInput
+    orderBy?: TuitionApplicationOrderByWithRelationInput | TuitionApplicationOrderByWithRelationInput[]
+    cursor?: TuitionApplicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TuitionApplicationScalarFieldEnum | TuitionApplicationScalarFieldEnum[]
+  }
+
+  /**
    * Tutor without action
    */
   export type TutorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2051,6 +2274,10 @@ export namespace Prisma {
      * Omit specific fields from the Tutor
      */
     omit?: TutorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TutorInclude<ExtArgs> | null
   }
 
 
@@ -2284,6 +2511,8 @@ export namespace Prisma {
     salary?: boolean
     mode?: boolean
     postedById?: boolean
+    applications?: boolean | Tuition$applicationsArgs<ExtArgs>
+    _count?: boolean | TuitionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tuition"]>
 
   export type TuitionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2323,10 +2552,18 @@ export namespace Prisma {
   }
 
   export type TuitionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "description" | "district" | "location" | "year" | "subjects" | "salary" | "mode" | "postedById", ExtArgs["result"]["tuition"]>
+  export type TuitionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    applications?: boolean | Tuition$applicationsArgs<ExtArgs>
+    _count?: boolean | TuitionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TuitionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TuitionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $TuitionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Tuition"
-    objects: {}
+    objects: {
+      applications: Prisma.$TuitionApplicationPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       description: string
@@ -2731,6 +2968,7 @@ export namespace Prisma {
    */
   export interface Prisma__TuitionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    applications<T extends Tuition$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, Tuition$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2786,6 +3024,10 @@ export namespace Prisma {
      */
     omit?: TuitionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
+    /**
      * Filter, which Tuition to fetch.
      */
     where: TuitionWhereUniqueInput
@@ -2804,6 +3046,10 @@ export namespace Prisma {
      */
     omit?: TuitionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
+    /**
      * Filter, which Tuition to fetch.
      */
     where: TuitionWhereUniqueInput
@@ -2821,6 +3067,10 @@ export namespace Prisma {
      * Omit specific fields from the Tuition
      */
     omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
     /**
      * Filter, which Tuition to fetch.
      */
@@ -2870,6 +3120,10 @@ export namespace Prisma {
      */
     omit?: TuitionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
+    /**
      * Filter, which Tuition to fetch.
      */
     where?: TuitionWhereInput
@@ -2918,6 +3172,10 @@ export namespace Prisma {
      */
     omit?: TuitionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
+    /**
      * Filter, which Tuitions to fetch.
      */
     where?: TuitionWhereInput
@@ -2960,6 +3218,10 @@ export namespace Prisma {
      * Omit specific fields from the Tuition
      */
     omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
     /**
      * The data needed to create a Tuition.
      */
@@ -3008,6 +3270,10 @@ export namespace Prisma {
      * Omit specific fields from the Tuition
      */
     omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
     /**
      * The data needed to update a Tuition.
      */
@@ -3075,6 +3341,10 @@ export namespace Prisma {
      */
     omit?: TuitionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
+    /**
      * The filter to search for the Tuition to update in case it exists.
      */
     where: TuitionWhereUniqueInput
@@ -3101,6 +3371,10 @@ export namespace Prisma {
      */
     omit?: TuitionOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
+    /**
      * Filter which Tuition to delete.
      */
     where: TuitionWhereUniqueInput
@@ -3121,6 +3395,30 @@ export namespace Prisma {
   }
 
   /**
+   * Tuition.applications
+   */
+  export type Tuition$applicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    where?: TuitionApplicationWhereInput
+    orderBy?: TuitionApplicationOrderByWithRelationInput | TuitionApplicationOrderByWithRelationInput[]
+    cursor?: TuitionApplicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TuitionApplicationScalarFieldEnum | TuitionApplicationScalarFieldEnum[]
+  }
+
+  /**
    * Tuition without action
    */
   export type TuitionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3132,6 +3430,1157 @@ export namespace Prisma {
      * Omit specific fields from the Tuition
      */
     omit?: TuitionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TuitionApplication
+   */
+
+  export type AggregateTuitionApplication = {
+    _count: TuitionApplicationCountAggregateOutputType | null
+    _avg: TuitionApplicationAvgAggregateOutputType | null
+    _sum: TuitionApplicationSumAggregateOutputType | null
+    _min: TuitionApplicationMinAggregateOutputType | null
+    _max: TuitionApplicationMaxAggregateOutputType | null
+  }
+
+  export type TuitionApplicationAvgAggregateOutputType = {
+    id: number | null
+    tuitionId: number | null
+    tutorId: number | null
+  }
+
+  export type TuitionApplicationSumAggregateOutputType = {
+    id: number | null
+    tuitionId: number | null
+    tutorId: number | null
+  }
+
+  export type TuitionApplicationMinAggregateOutputType = {
+    id: number | null
+    tuitionId: number | null
+    tutorId: number | null
+    message: string | null
+    status: string | null
+    isRead: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TuitionApplicationMaxAggregateOutputType = {
+    id: number | null
+    tuitionId: number | null
+    tutorId: number | null
+    message: string | null
+    status: string | null
+    isRead: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TuitionApplicationCountAggregateOutputType = {
+    id: number
+    tuitionId: number
+    tutorId: number
+    message: number
+    status: number
+    isRead: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TuitionApplicationAvgAggregateInputType = {
+    id?: true
+    tuitionId?: true
+    tutorId?: true
+  }
+
+  export type TuitionApplicationSumAggregateInputType = {
+    id?: true
+    tuitionId?: true
+    tutorId?: true
+  }
+
+  export type TuitionApplicationMinAggregateInputType = {
+    id?: true
+    tuitionId?: true
+    tutorId?: true
+    message?: true
+    status?: true
+    isRead?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TuitionApplicationMaxAggregateInputType = {
+    id?: true
+    tuitionId?: true
+    tutorId?: true
+    message?: true
+    status?: true
+    isRead?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TuitionApplicationCountAggregateInputType = {
+    id?: true
+    tuitionId?: true
+    tutorId?: true
+    message?: true
+    status?: true
+    isRead?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TuitionApplicationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TuitionApplication to aggregate.
+     */
+    where?: TuitionApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TuitionApplications to fetch.
+     */
+    orderBy?: TuitionApplicationOrderByWithRelationInput | TuitionApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TuitionApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TuitionApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TuitionApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TuitionApplications
+    **/
+    _count?: true | TuitionApplicationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TuitionApplicationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TuitionApplicationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TuitionApplicationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TuitionApplicationMaxAggregateInputType
+  }
+
+  export type GetTuitionApplicationAggregateType<T extends TuitionApplicationAggregateArgs> = {
+        [P in keyof T & keyof AggregateTuitionApplication]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTuitionApplication[P]>
+      : GetScalarType<T[P], AggregateTuitionApplication[P]>
+  }
+
+
+
+
+  export type TuitionApplicationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TuitionApplicationWhereInput
+    orderBy?: TuitionApplicationOrderByWithAggregationInput | TuitionApplicationOrderByWithAggregationInput[]
+    by: TuitionApplicationScalarFieldEnum[] | TuitionApplicationScalarFieldEnum
+    having?: TuitionApplicationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TuitionApplicationCountAggregateInputType | true
+    _avg?: TuitionApplicationAvgAggregateInputType
+    _sum?: TuitionApplicationSumAggregateInputType
+    _min?: TuitionApplicationMinAggregateInputType
+    _max?: TuitionApplicationMaxAggregateInputType
+  }
+
+  export type TuitionApplicationGroupByOutputType = {
+    id: number
+    tuitionId: number
+    tutorId: number
+    message: string | null
+    status: string
+    isRead: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: TuitionApplicationCountAggregateOutputType | null
+    _avg: TuitionApplicationAvgAggregateOutputType | null
+    _sum: TuitionApplicationSumAggregateOutputType | null
+    _min: TuitionApplicationMinAggregateOutputType | null
+    _max: TuitionApplicationMaxAggregateOutputType | null
+  }
+
+  type GetTuitionApplicationGroupByPayload<T extends TuitionApplicationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TuitionApplicationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TuitionApplicationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TuitionApplicationGroupByOutputType[P]>
+            : GetScalarType<T[P], TuitionApplicationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TuitionApplicationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tuitionId?: boolean
+    tutorId?: boolean
+    message?: boolean
+    status?: boolean
+    isRead?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tuition?: boolean | TuitionDefaultArgs<ExtArgs>
+    tutor?: boolean | TutorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tuitionApplication"]>
+
+  export type TuitionApplicationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tuitionId?: boolean
+    tutorId?: boolean
+    message?: boolean
+    status?: boolean
+    isRead?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tuition?: boolean | TuitionDefaultArgs<ExtArgs>
+    tutor?: boolean | TutorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tuitionApplication"]>
+
+  export type TuitionApplicationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tuitionId?: boolean
+    tutorId?: boolean
+    message?: boolean
+    status?: boolean
+    isRead?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tuition?: boolean | TuitionDefaultArgs<ExtArgs>
+    tutor?: boolean | TutorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tuitionApplication"]>
+
+  export type TuitionApplicationSelectScalar = {
+    id?: boolean
+    tuitionId?: boolean
+    tutorId?: boolean
+    message?: boolean
+    status?: boolean
+    isRead?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TuitionApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tuitionId" | "tutorId" | "message" | "status" | "isRead" | "createdAt" | "updatedAt", ExtArgs["result"]["tuitionApplication"]>
+  export type TuitionApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tuition?: boolean | TuitionDefaultArgs<ExtArgs>
+    tutor?: boolean | TutorDefaultArgs<ExtArgs>
+  }
+  export type TuitionApplicationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tuition?: boolean | TuitionDefaultArgs<ExtArgs>
+    tutor?: boolean | TutorDefaultArgs<ExtArgs>
+  }
+  export type TuitionApplicationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tuition?: boolean | TuitionDefaultArgs<ExtArgs>
+    tutor?: boolean | TutorDefaultArgs<ExtArgs>
+  }
+
+  export type $TuitionApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TuitionApplication"
+    objects: {
+      tuition: Prisma.$TuitionPayload<ExtArgs>
+      tutor: Prisma.$TutorPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      tuitionId: number
+      tutorId: number
+      message: string | null
+      status: string
+      isRead: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tuitionApplication"]>
+    composites: {}
+  }
+
+  type TuitionApplicationGetPayload<S extends boolean | null | undefined | TuitionApplicationDefaultArgs> = $Result.GetResult<Prisma.$TuitionApplicationPayload, S>
+
+  type TuitionApplicationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TuitionApplicationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TuitionApplicationCountAggregateInputType | true
+    }
+
+  export interface TuitionApplicationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TuitionApplication'], meta: { name: 'TuitionApplication' } }
+    /**
+     * Find zero or one TuitionApplication that matches the filter.
+     * @param {TuitionApplicationFindUniqueArgs} args - Arguments to find a TuitionApplication
+     * @example
+     * // Get one TuitionApplication
+     * const tuitionApplication = await prisma.tuitionApplication.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TuitionApplicationFindUniqueArgs>(args: SelectSubset<T, TuitionApplicationFindUniqueArgs<ExtArgs>>): Prisma__TuitionApplicationClient<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TuitionApplication that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TuitionApplicationFindUniqueOrThrowArgs} args - Arguments to find a TuitionApplication
+     * @example
+     * // Get one TuitionApplication
+     * const tuitionApplication = await prisma.tuitionApplication.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TuitionApplicationFindUniqueOrThrowArgs>(args: SelectSubset<T, TuitionApplicationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TuitionApplicationClient<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TuitionApplication that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionApplicationFindFirstArgs} args - Arguments to find a TuitionApplication
+     * @example
+     * // Get one TuitionApplication
+     * const tuitionApplication = await prisma.tuitionApplication.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TuitionApplicationFindFirstArgs>(args?: SelectSubset<T, TuitionApplicationFindFirstArgs<ExtArgs>>): Prisma__TuitionApplicationClient<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TuitionApplication that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionApplicationFindFirstOrThrowArgs} args - Arguments to find a TuitionApplication
+     * @example
+     * // Get one TuitionApplication
+     * const tuitionApplication = await prisma.tuitionApplication.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TuitionApplicationFindFirstOrThrowArgs>(args?: SelectSubset<T, TuitionApplicationFindFirstOrThrowArgs<ExtArgs>>): Prisma__TuitionApplicationClient<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TuitionApplications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionApplicationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TuitionApplications
+     * const tuitionApplications = await prisma.tuitionApplication.findMany()
+     * 
+     * // Get first 10 TuitionApplications
+     * const tuitionApplications = await prisma.tuitionApplication.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tuitionApplicationWithIdOnly = await prisma.tuitionApplication.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TuitionApplicationFindManyArgs>(args?: SelectSubset<T, TuitionApplicationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TuitionApplication.
+     * @param {TuitionApplicationCreateArgs} args - Arguments to create a TuitionApplication.
+     * @example
+     * // Create one TuitionApplication
+     * const TuitionApplication = await prisma.tuitionApplication.create({
+     *   data: {
+     *     // ... data to create a TuitionApplication
+     *   }
+     * })
+     * 
+     */
+    create<T extends TuitionApplicationCreateArgs>(args: SelectSubset<T, TuitionApplicationCreateArgs<ExtArgs>>): Prisma__TuitionApplicationClient<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TuitionApplications.
+     * @param {TuitionApplicationCreateManyArgs} args - Arguments to create many TuitionApplications.
+     * @example
+     * // Create many TuitionApplications
+     * const tuitionApplication = await prisma.tuitionApplication.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TuitionApplicationCreateManyArgs>(args?: SelectSubset<T, TuitionApplicationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TuitionApplications and returns the data saved in the database.
+     * @param {TuitionApplicationCreateManyAndReturnArgs} args - Arguments to create many TuitionApplications.
+     * @example
+     * // Create many TuitionApplications
+     * const tuitionApplication = await prisma.tuitionApplication.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TuitionApplications and only return the `id`
+     * const tuitionApplicationWithIdOnly = await prisma.tuitionApplication.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TuitionApplicationCreateManyAndReturnArgs>(args?: SelectSubset<T, TuitionApplicationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TuitionApplication.
+     * @param {TuitionApplicationDeleteArgs} args - Arguments to delete one TuitionApplication.
+     * @example
+     * // Delete one TuitionApplication
+     * const TuitionApplication = await prisma.tuitionApplication.delete({
+     *   where: {
+     *     // ... filter to delete one TuitionApplication
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TuitionApplicationDeleteArgs>(args: SelectSubset<T, TuitionApplicationDeleteArgs<ExtArgs>>): Prisma__TuitionApplicationClient<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TuitionApplication.
+     * @param {TuitionApplicationUpdateArgs} args - Arguments to update one TuitionApplication.
+     * @example
+     * // Update one TuitionApplication
+     * const tuitionApplication = await prisma.tuitionApplication.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TuitionApplicationUpdateArgs>(args: SelectSubset<T, TuitionApplicationUpdateArgs<ExtArgs>>): Prisma__TuitionApplicationClient<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TuitionApplications.
+     * @param {TuitionApplicationDeleteManyArgs} args - Arguments to filter TuitionApplications to delete.
+     * @example
+     * // Delete a few TuitionApplications
+     * const { count } = await prisma.tuitionApplication.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TuitionApplicationDeleteManyArgs>(args?: SelectSubset<T, TuitionApplicationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TuitionApplications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionApplicationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TuitionApplications
+     * const tuitionApplication = await prisma.tuitionApplication.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TuitionApplicationUpdateManyArgs>(args: SelectSubset<T, TuitionApplicationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TuitionApplications and returns the data updated in the database.
+     * @param {TuitionApplicationUpdateManyAndReturnArgs} args - Arguments to update many TuitionApplications.
+     * @example
+     * // Update many TuitionApplications
+     * const tuitionApplication = await prisma.tuitionApplication.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TuitionApplications and only return the `id`
+     * const tuitionApplicationWithIdOnly = await prisma.tuitionApplication.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TuitionApplicationUpdateManyAndReturnArgs>(args: SelectSubset<T, TuitionApplicationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TuitionApplication.
+     * @param {TuitionApplicationUpsertArgs} args - Arguments to update or create a TuitionApplication.
+     * @example
+     * // Update or create a TuitionApplication
+     * const tuitionApplication = await prisma.tuitionApplication.upsert({
+     *   create: {
+     *     // ... data to create a TuitionApplication
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TuitionApplication we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TuitionApplicationUpsertArgs>(args: SelectSubset<T, TuitionApplicationUpsertArgs<ExtArgs>>): Prisma__TuitionApplicationClient<$Result.GetResult<Prisma.$TuitionApplicationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TuitionApplications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionApplicationCountArgs} args - Arguments to filter TuitionApplications to count.
+     * @example
+     * // Count the number of TuitionApplications
+     * const count = await prisma.tuitionApplication.count({
+     *   where: {
+     *     // ... the filter for the TuitionApplications we want to count
+     *   }
+     * })
+    **/
+    count<T extends TuitionApplicationCountArgs>(
+      args?: Subset<T, TuitionApplicationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TuitionApplicationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TuitionApplication.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionApplicationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TuitionApplicationAggregateArgs>(args: Subset<T, TuitionApplicationAggregateArgs>): Prisma.PrismaPromise<GetTuitionApplicationAggregateType<T>>
+
+    /**
+     * Group by TuitionApplication.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TuitionApplicationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TuitionApplicationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TuitionApplicationGroupByArgs['orderBy'] }
+        : { orderBy?: TuitionApplicationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TuitionApplicationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTuitionApplicationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TuitionApplication model
+   */
+  readonly fields: TuitionApplicationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TuitionApplication.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TuitionApplicationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tuition<T extends TuitionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TuitionDefaultArgs<ExtArgs>>): Prisma__TuitionClient<$Result.GetResult<Prisma.$TuitionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    tutor<T extends TutorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TutorDefaultArgs<ExtArgs>>): Prisma__TutorClient<$Result.GetResult<Prisma.$TutorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TuitionApplication model
+   */
+  interface TuitionApplicationFieldRefs {
+    readonly id: FieldRef<"TuitionApplication", 'Int'>
+    readonly tuitionId: FieldRef<"TuitionApplication", 'Int'>
+    readonly tutorId: FieldRef<"TuitionApplication", 'Int'>
+    readonly message: FieldRef<"TuitionApplication", 'String'>
+    readonly status: FieldRef<"TuitionApplication", 'String'>
+    readonly isRead: FieldRef<"TuitionApplication", 'Boolean'>
+    readonly createdAt: FieldRef<"TuitionApplication", 'DateTime'>
+    readonly updatedAt: FieldRef<"TuitionApplication", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TuitionApplication findUnique
+   */
+  export type TuitionApplicationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which TuitionApplication to fetch.
+     */
+    where: TuitionApplicationWhereUniqueInput
+  }
+
+  /**
+   * TuitionApplication findUniqueOrThrow
+   */
+  export type TuitionApplicationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which TuitionApplication to fetch.
+     */
+    where: TuitionApplicationWhereUniqueInput
+  }
+
+  /**
+   * TuitionApplication findFirst
+   */
+  export type TuitionApplicationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which TuitionApplication to fetch.
+     */
+    where?: TuitionApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TuitionApplications to fetch.
+     */
+    orderBy?: TuitionApplicationOrderByWithRelationInput | TuitionApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TuitionApplications.
+     */
+    cursor?: TuitionApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TuitionApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TuitionApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TuitionApplications.
+     */
+    distinct?: TuitionApplicationScalarFieldEnum | TuitionApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * TuitionApplication findFirstOrThrow
+   */
+  export type TuitionApplicationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which TuitionApplication to fetch.
+     */
+    where?: TuitionApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TuitionApplications to fetch.
+     */
+    orderBy?: TuitionApplicationOrderByWithRelationInput | TuitionApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TuitionApplications.
+     */
+    cursor?: TuitionApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TuitionApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TuitionApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TuitionApplications.
+     */
+    distinct?: TuitionApplicationScalarFieldEnum | TuitionApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * TuitionApplication findMany
+   */
+  export type TuitionApplicationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which TuitionApplications to fetch.
+     */
+    where?: TuitionApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TuitionApplications to fetch.
+     */
+    orderBy?: TuitionApplicationOrderByWithRelationInput | TuitionApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TuitionApplications.
+     */
+    cursor?: TuitionApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TuitionApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TuitionApplications.
+     */
+    skip?: number
+    distinct?: TuitionApplicationScalarFieldEnum | TuitionApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * TuitionApplication create
+   */
+  export type TuitionApplicationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TuitionApplication.
+     */
+    data: XOR<TuitionApplicationCreateInput, TuitionApplicationUncheckedCreateInput>
+  }
+
+  /**
+   * TuitionApplication createMany
+   */
+  export type TuitionApplicationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TuitionApplications.
+     */
+    data: TuitionApplicationCreateManyInput | TuitionApplicationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TuitionApplication createManyAndReturn
+   */
+  export type TuitionApplicationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to create many TuitionApplications.
+     */
+    data: TuitionApplicationCreateManyInput | TuitionApplicationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TuitionApplication update
+   */
+  export type TuitionApplicationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TuitionApplication.
+     */
+    data: XOR<TuitionApplicationUpdateInput, TuitionApplicationUncheckedUpdateInput>
+    /**
+     * Choose, which TuitionApplication to update.
+     */
+    where: TuitionApplicationWhereUniqueInput
+  }
+
+  /**
+   * TuitionApplication updateMany
+   */
+  export type TuitionApplicationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TuitionApplications.
+     */
+    data: XOR<TuitionApplicationUpdateManyMutationInput, TuitionApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which TuitionApplications to update
+     */
+    where?: TuitionApplicationWhereInput
+    /**
+     * Limit how many TuitionApplications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TuitionApplication updateManyAndReturn
+   */
+  export type TuitionApplicationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to update TuitionApplications.
+     */
+    data: XOR<TuitionApplicationUpdateManyMutationInput, TuitionApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which TuitionApplications to update
+     */
+    where?: TuitionApplicationWhereInput
+    /**
+     * Limit how many TuitionApplications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TuitionApplication upsert
+   */
+  export type TuitionApplicationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TuitionApplication to update in case it exists.
+     */
+    where: TuitionApplicationWhereUniqueInput
+    /**
+     * In case the TuitionApplication found by the `where` argument doesn't exist, create a new TuitionApplication with this data.
+     */
+    create: XOR<TuitionApplicationCreateInput, TuitionApplicationUncheckedCreateInput>
+    /**
+     * In case the TuitionApplication was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TuitionApplicationUpdateInput, TuitionApplicationUncheckedUpdateInput>
+  }
+
+  /**
+   * TuitionApplication delete
+   */
+  export type TuitionApplicationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
+    /**
+     * Filter which TuitionApplication to delete.
+     */
+    where: TuitionApplicationWhereUniqueInput
+  }
+
+  /**
+   * TuitionApplication deleteMany
+   */
+  export type TuitionApplicationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TuitionApplications to delete
+     */
+    where?: TuitionApplicationWhereInput
+    /**
+     * Limit how many TuitionApplications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TuitionApplication without action
+   */
+  export type TuitionApplicationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TuitionApplication
+     */
+    select?: TuitionApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TuitionApplication
+     */
+    omit?: TuitionApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TuitionApplicationInclude<ExtArgs> | null
   }
 
 
@@ -3180,6 +4629,20 @@ export namespace Prisma {
   export type TuitionScalarFieldEnum = (typeof TuitionScalarFieldEnum)[keyof typeof TuitionScalarFieldEnum]
 
 
+  export const TuitionApplicationScalarFieldEnum: {
+    id: 'id',
+    tuitionId: 'tuitionId',
+    tutorId: 'tutorId',
+    message: 'message',
+    status: 'status',
+    isRead: 'isRead',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TuitionApplicationScalarFieldEnum = (typeof TuitionApplicationScalarFieldEnum)[keyof typeof TuitionApplicationScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -3194,6 +4657,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -3230,6 +4701,27 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3260,6 +4752,7 @@ export namespace Prisma {
     sampleTeachingVideo?: StringFilter<"Tutor"> | string
     subjectToTeach?: StringFilter<"Tutor"> | string
     userId?: StringFilter<"Tutor"> | string
+    applications?: TuitionApplicationListRelationFilter
   }
 
   export type TutorOrderByWithRelationInput = {
@@ -3273,6 +4766,7 @@ export namespace Prisma {
     sampleTeachingVideo?: SortOrder
     subjectToTeach?: SortOrder
     userId?: SortOrder
+    applications?: TuitionApplicationOrderByRelationAggregateInput
   }
 
   export type TutorWhereUniqueInput = Prisma.AtLeast<{
@@ -3289,6 +4783,7 @@ export namespace Prisma {
     sampleTeachingVideo?: StringFilter<"Tutor"> | string
     subjectToTeach?: StringFilter<"Tutor"> | string
     userId?: StringFilter<"Tutor"> | string
+    applications?: TuitionApplicationListRelationFilter
   }, "id" | "email">
 
   export type TutorOrderByWithAggregationInput = {
@@ -3338,6 +4833,7 @@ export namespace Prisma {
     salary?: StringFilter<"Tuition"> | string
     mode?: StringFilter<"Tuition"> | string
     postedById?: StringFilter<"Tuition"> | string
+    applications?: TuitionApplicationListRelationFilter
   }
 
   export type TuitionOrderByWithRelationInput = {
@@ -3350,6 +4846,7 @@ export namespace Prisma {
     salary?: SortOrder
     mode?: SortOrder
     postedById?: SortOrder
+    applications?: TuitionApplicationOrderByRelationAggregateInput
   }
 
   export type TuitionWhereUniqueInput = Prisma.AtLeast<{
@@ -3365,6 +4862,7 @@ export namespace Prisma {
     salary?: StringFilter<"Tuition"> | string
     mode?: StringFilter<"Tuition"> | string
     postedById?: StringFilter<"Tuition"> | string
+    applications?: TuitionApplicationListRelationFilter
   }, "id">
 
   export type TuitionOrderByWithAggregationInput = {
@@ -3399,6 +4897,82 @@ export namespace Prisma {
     postedById?: StringWithAggregatesFilter<"Tuition"> | string
   }
 
+  export type TuitionApplicationWhereInput = {
+    AND?: TuitionApplicationWhereInput | TuitionApplicationWhereInput[]
+    OR?: TuitionApplicationWhereInput[]
+    NOT?: TuitionApplicationWhereInput | TuitionApplicationWhereInput[]
+    id?: IntFilter<"TuitionApplication"> | number
+    tuitionId?: IntFilter<"TuitionApplication"> | number
+    tutorId?: IntFilter<"TuitionApplication"> | number
+    message?: StringNullableFilter<"TuitionApplication"> | string | null
+    status?: StringFilter<"TuitionApplication"> | string
+    isRead?: BoolFilter<"TuitionApplication"> | boolean
+    createdAt?: DateTimeFilter<"TuitionApplication"> | Date | string
+    updatedAt?: DateTimeFilter<"TuitionApplication"> | Date | string
+    tuition?: XOR<TuitionScalarRelationFilter, TuitionWhereInput>
+    tutor?: XOR<TutorScalarRelationFilter, TutorWhereInput>
+  }
+
+  export type TuitionApplicationOrderByWithRelationInput = {
+    id?: SortOrder
+    tuitionId?: SortOrder
+    tutorId?: SortOrder
+    message?: SortOrderInput | SortOrder
+    status?: SortOrder
+    isRead?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tuition?: TuitionOrderByWithRelationInput
+    tutor?: TutorOrderByWithRelationInput
+  }
+
+  export type TuitionApplicationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    tuitionId_tutorId?: TuitionApplicationTuitionIdTutorIdCompoundUniqueInput
+    AND?: TuitionApplicationWhereInput | TuitionApplicationWhereInput[]
+    OR?: TuitionApplicationWhereInput[]
+    NOT?: TuitionApplicationWhereInput | TuitionApplicationWhereInput[]
+    tuitionId?: IntFilter<"TuitionApplication"> | number
+    tutorId?: IntFilter<"TuitionApplication"> | number
+    message?: StringNullableFilter<"TuitionApplication"> | string | null
+    status?: StringFilter<"TuitionApplication"> | string
+    isRead?: BoolFilter<"TuitionApplication"> | boolean
+    createdAt?: DateTimeFilter<"TuitionApplication"> | Date | string
+    updatedAt?: DateTimeFilter<"TuitionApplication"> | Date | string
+    tuition?: XOR<TuitionScalarRelationFilter, TuitionWhereInput>
+    tutor?: XOR<TutorScalarRelationFilter, TutorWhereInput>
+  }, "id" | "tuitionId_tutorId">
+
+  export type TuitionApplicationOrderByWithAggregationInput = {
+    id?: SortOrder
+    tuitionId?: SortOrder
+    tutorId?: SortOrder
+    message?: SortOrderInput | SortOrder
+    status?: SortOrder
+    isRead?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TuitionApplicationCountOrderByAggregateInput
+    _avg?: TuitionApplicationAvgOrderByAggregateInput
+    _max?: TuitionApplicationMaxOrderByAggregateInput
+    _min?: TuitionApplicationMinOrderByAggregateInput
+    _sum?: TuitionApplicationSumOrderByAggregateInput
+  }
+
+  export type TuitionApplicationScalarWhereWithAggregatesInput = {
+    AND?: TuitionApplicationScalarWhereWithAggregatesInput | TuitionApplicationScalarWhereWithAggregatesInput[]
+    OR?: TuitionApplicationScalarWhereWithAggregatesInput[]
+    NOT?: TuitionApplicationScalarWhereWithAggregatesInput | TuitionApplicationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"TuitionApplication"> | number
+    tuitionId?: IntWithAggregatesFilter<"TuitionApplication"> | number
+    tutorId?: IntWithAggregatesFilter<"TuitionApplication"> | number
+    message?: StringNullableWithAggregatesFilter<"TuitionApplication"> | string | null
+    status?: StringWithAggregatesFilter<"TuitionApplication"> | string
+    isRead?: BoolWithAggregatesFilter<"TuitionApplication"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"TuitionApplication"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TuitionApplication"> | Date | string
+  }
+
   export type TutorCreateInput = {
     institution: string
     subjects: string
@@ -3409,6 +4983,7 @@ export namespace Prisma {
     sampleTeachingVideo: string
     subjectToTeach: string
     userId: string
+    applications?: TuitionApplicationCreateNestedManyWithoutTutorInput
   }
 
   export type TutorUncheckedCreateInput = {
@@ -3422,6 +4997,7 @@ export namespace Prisma {
     sampleTeachingVideo: string
     subjectToTeach: string
     userId: string
+    applications?: TuitionApplicationUncheckedCreateNestedManyWithoutTutorInput
   }
 
   export type TutorUpdateInput = {
@@ -3434,6 +5010,7 @@ export namespace Prisma {
     sampleTeachingVideo?: StringFieldUpdateOperationsInput | string
     subjectToTeach?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    applications?: TuitionApplicationUpdateManyWithoutTutorNestedInput
   }
 
   export type TutorUncheckedUpdateInput = {
@@ -3447,6 +5024,7 @@ export namespace Prisma {
     sampleTeachingVideo?: StringFieldUpdateOperationsInput | string
     subjectToTeach?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    applications?: TuitionApplicationUncheckedUpdateManyWithoutTutorNestedInput
   }
 
   export type TutorCreateManyInput = {
@@ -3496,6 +5074,7 @@ export namespace Prisma {
     salary: string
     mode: string
     postedById: string
+    applications?: TuitionApplicationCreateNestedManyWithoutTuitionInput
   }
 
   export type TuitionUncheckedCreateInput = {
@@ -3508,6 +5087,7 @@ export namespace Prisma {
     salary: string
     mode: string
     postedById: string
+    applications?: TuitionApplicationUncheckedCreateNestedManyWithoutTuitionInput
   }
 
   export type TuitionUpdateInput = {
@@ -3519,6 +5099,7 @@ export namespace Prisma {
     salary?: StringFieldUpdateOperationsInput | string
     mode?: StringFieldUpdateOperationsInput | string
     postedById?: StringFieldUpdateOperationsInput | string
+    applications?: TuitionApplicationUpdateManyWithoutTuitionNestedInput
   }
 
   export type TuitionUncheckedUpdateInput = {
@@ -3531,6 +5112,7 @@ export namespace Prisma {
     salary?: StringFieldUpdateOperationsInput | string
     mode?: StringFieldUpdateOperationsInput | string
     postedById?: StringFieldUpdateOperationsInput | string
+    applications?: TuitionApplicationUncheckedUpdateManyWithoutTuitionNestedInput
   }
 
   export type TuitionCreateManyInput = {
@@ -3568,6 +5150,78 @@ export namespace Prisma {
     postedById?: StringFieldUpdateOperationsInput | string
   }
 
+  export type TuitionApplicationCreateInput = {
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tuition: TuitionCreateNestedOneWithoutApplicationsInput
+    tutor: TutorCreateNestedOneWithoutApplicationsInput
+  }
+
+  export type TuitionApplicationUncheckedCreateInput = {
+    id?: number
+    tuitionId: number
+    tutorId: number
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TuitionApplicationUpdateInput = {
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tuition?: TuitionUpdateOneRequiredWithoutApplicationsNestedInput
+    tutor?: TutorUpdateOneRequiredWithoutApplicationsNestedInput
+  }
+
+  export type TuitionApplicationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tuitionId?: IntFieldUpdateOperationsInput | number
+    tutorId?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TuitionApplicationCreateManyInput = {
+    id?: number
+    tuitionId: number
+    tutorId: number
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TuitionApplicationUpdateManyMutationInput = {
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TuitionApplicationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tuitionId?: IntFieldUpdateOperationsInput | number
+    tutorId?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -3592,6 +5246,16 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type TuitionApplicationListRelationFilter = {
+    every?: TuitionApplicationWhereInput
+    some?: TuitionApplicationWhereInput
+    none?: TuitionApplicationWhereInput
+  }
+
+  export type TuitionApplicationOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type TutorCountOrderByAggregateInput = {
@@ -3719,8 +5383,172 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type TuitionScalarRelationFilter = {
+    is?: TuitionWhereInput
+    isNot?: TuitionWhereInput
+  }
+
+  export type TutorScalarRelationFilter = {
+    is?: TutorWhereInput
+    isNot?: TutorWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type TuitionApplicationTuitionIdTutorIdCompoundUniqueInput = {
+    tuitionId: number
+    tutorId: number
+  }
+
+  export type TuitionApplicationCountOrderByAggregateInput = {
+    id?: SortOrder
+    tuitionId?: SortOrder
+    tutorId?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    isRead?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TuitionApplicationAvgOrderByAggregateInput = {
+    id?: SortOrder
+    tuitionId?: SortOrder
+    tutorId?: SortOrder
+  }
+
+  export type TuitionApplicationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tuitionId?: SortOrder
+    tutorId?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    isRead?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TuitionApplicationMinOrderByAggregateInput = {
+    id?: SortOrder
+    tuitionId?: SortOrder
+    tutorId?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    isRead?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TuitionApplicationSumOrderByAggregateInput = {
+    id?: SortOrder
+    tuitionId?: SortOrder
+    tutorId?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type TuitionApplicationCreateNestedManyWithoutTutorInput = {
+    create?: XOR<TuitionApplicationCreateWithoutTutorInput, TuitionApplicationUncheckedCreateWithoutTutorInput> | TuitionApplicationCreateWithoutTutorInput[] | TuitionApplicationUncheckedCreateWithoutTutorInput[]
+    connectOrCreate?: TuitionApplicationCreateOrConnectWithoutTutorInput | TuitionApplicationCreateOrConnectWithoutTutorInput[]
+    createMany?: TuitionApplicationCreateManyTutorInputEnvelope
+    connect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+  }
+
+  export type TuitionApplicationUncheckedCreateNestedManyWithoutTutorInput = {
+    create?: XOR<TuitionApplicationCreateWithoutTutorInput, TuitionApplicationUncheckedCreateWithoutTutorInput> | TuitionApplicationCreateWithoutTutorInput[] | TuitionApplicationUncheckedCreateWithoutTutorInput[]
+    connectOrCreate?: TuitionApplicationCreateOrConnectWithoutTutorInput | TuitionApplicationCreateOrConnectWithoutTutorInput[]
+    createMany?: TuitionApplicationCreateManyTutorInputEnvelope
+    connect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type TuitionApplicationUpdateManyWithoutTutorNestedInput = {
+    create?: XOR<TuitionApplicationCreateWithoutTutorInput, TuitionApplicationUncheckedCreateWithoutTutorInput> | TuitionApplicationCreateWithoutTutorInput[] | TuitionApplicationUncheckedCreateWithoutTutorInput[]
+    connectOrCreate?: TuitionApplicationCreateOrConnectWithoutTutorInput | TuitionApplicationCreateOrConnectWithoutTutorInput[]
+    upsert?: TuitionApplicationUpsertWithWhereUniqueWithoutTutorInput | TuitionApplicationUpsertWithWhereUniqueWithoutTutorInput[]
+    createMany?: TuitionApplicationCreateManyTutorInputEnvelope
+    set?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    disconnect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    delete?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    connect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    update?: TuitionApplicationUpdateWithWhereUniqueWithoutTutorInput | TuitionApplicationUpdateWithWhereUniqueWithoutTutorInput[]
+    updateMany?: TuitionApplicationUpdateManyWithWhereWithoutTutorInput | TuitionApplicationUpdateManyWithWhereWithoutTutorInput[]
+    deleteMany?: TuitionApplicationScalarWhereInput | TuitionApplicationScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -3729,6 +5557,102 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type TuitionApplicationUncheckedUpdateManyWithoutTutorNestedInput = {
+    create?: XOR<TuitionApplicationCreateWithoutTutorInput, TuitionApplicationUncheckedCreateWithoutTutorInput> | TuitionApplicationCreateWithoutTutorInput[] | TuitionApplicationUncheckedCreateWithoutTutorInput[]
+    connectOrCreate?: TuitionApplicationCreateOrConnectWithoutTutorInput | TuitionApplicationCreateOrConnectWithoutTutorInput[]
+    upsert?: TuitionApplicationUpsertWithWhereUniqueWithoutTutorInput | TuitionApplicationUpsertWithWhereUniqueWithoutTutorInput[]
+    createMany?: TuitionApplicationCreateManyTutorInputEnvelope
+    set?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    disconnect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    delete?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    connect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    update?: TuitionApplicationUpdateWithWhereUniqueWithoutTutorInput | TuitionApplicationUpdateWithWhereUniqueWithoutTutorInput[]
+    updateMany?: TuitionApplicationUpdateManyWithWhereWithoutTutorInput | TuitionApplicationUpdateManyWithWhereWithoutTutorInput[]
+    deleteMany?: TuitionApplicationScalarWhereInput | TuitionApplicationScalarWhereInput[]
+  }
+
+  export type TuitionApplicationCreateNestedManyWithoutTuitionInput = {
+    create?: XOR<TuitionApplicationCreateWithoutTuitionInput, TuitionApplicationUncheckedCreateWithoutTuitionInput> | TuitionApplicationCreateWithoutTuitionInput[] | TuitionApplicationUncheckedCreateWithoutTuitionInput[]
+    connectOrCreate?: TuitionApplicationCreateOrConnectWithoutTuitionInput | TuitionApplicationCreateOrConnectWithoutTuitionInput[]
+    createMany?: TuitionApplicationCreateManyTuitionInputEnvelope
+    connect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+  }
+
+  export type TuitionApplicationUncheckedCreateNestedManyWithoutTuitionInput = {
+    create?: XOR<TuitionApplicationCreateWithoutTuitionInput, TuitionApplicationUncheckedCreateWithoutTuitionInput> | TuitionApplicationCreateWithoutTuitionInput[] | TuitionApplicationUncheckedCreateWithoutTuitionInput[]
+    connectOrCreate?: TuitionApplicationCreateOrConnectWithoutTuitionInput | TuitionApplicationCreateOrConnectWithoutTuitionInput[]
+    createMany?: TuitionApplicationCreateManyTuitionInputEnvelope
+    connect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+  }
+
+  export type TuitionApplicationUpdateManyWithoutTuitionNestedInput = {
+    create?: XOR<TuitionApplicationCreateWithoutTuitionInput, TuitionApplicationUncheckedCreateWithoutTuitionInput> | TuitionApplicationCreateWithoutTuitionInput[] | TuitionApplicationUncheckedCreateWithoutTuitionInput[]
+    connectOrCreate?: TuitionApplicationCreateOrConnectWithoutTuitionInput | TuitionApplicationCreateOrConnectWithoutTuitionInput[]
+    upsert?: TuitionApplicationUpsertWithWhereUniqueWithoutTuitionInput | TuitionApplicationUpsertWithWhereUniqueWithoutTuitionInput[]
+    createMany?: TuitionApplicationCreateManyTuitionInputEnvelope
+    set?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    disconnect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    delete?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    connect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    update?: TuitionApplicationUpdateWithWhereUniqueWithoutTuitionInput | TuitionApplicationUpdateWithWhereUniqueWithoutTuitionInput[]
+    updateMany?: TuitionApplicationUpdateManyWithWhereWithoutTuitionInput | TuitionApplicationUpdateManyWithWhereWithoutTuitionInput[]
+    deleteMany?: TuitionApplicationScalarWhereInput | TuitionApplicationScalarWhereInput[]
+  }
+
+  export type TuitionApplicationUncheckedUpdateManyWithoutTuitionNestedInput = {
+    create?: XOR<TuitionApplicationCreateWithoutTuitionInput, TuitionApplicationUncheckedCreateWithoutTuitionInput> | TuitionApplicationCreateWithoutTuitionInput[] | TuitionApplicationUncheckedCreateWithoutTuitionInput[]
+    connectOrCreate?: TuitionApplicationCreateOrConnectWithoutTuitionInput | TuitionApplicationCreateOrConnectWithoutTuitionInput[]
+    upsert?: TuitionApplicationUpsertWithWhereUniqueWithoutTuitionInput | TuitionApplicationUpsertWithWhereUniqueWithoutTuitionInput[]
+    createMany?: TuitionApplicationCreateManyTuitionInputEnvelope
+    set?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    disconnect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    delete?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    connect?: TuitionApplicationWhereUniqueInput | TuitionApplicationWhereUniqueInput[]
+    update?: TuitionApplicationUpdateWithWhereUniqueWithoutTuitionInput | TuitionApplicationUpdateWithWhereUniqueWithoutTuitionInput[]
+    updateMany?: TuitionApplicationUpdateManyWithWhereWithoutTuitionInput | TuitionApplicationUpdateManyWithWhereWithoutTuitionInput[]
+    deleteMany?: TuitionApplicationScalarWhereInput | TuitionApplicationScalarWhereInput[]
+  }
+
+  export type TuitionCreateNestedOneWithoutApplicationsInput = {
+    create?: XOR<TuitionCreateWithoutApplicationsInput, TuitionUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: TuitionCreateOrConnectWithoutApplicationsInput
+    connect?: TuitionWhereUniqueInput
+  }
+
+  export type TutorCreateNestedOneWithoutApplicationsInput = {
+    create?: XOR<TutorCreateWithoutApplicationsInput, TutorUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: TutorCreateOrConnectWithoutApplicationsInput
+    connect?: TutorWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type TuitionUpdateOneRequiredWithoutApplicationsNestedInput = {
+    create?: XOR<TuitionCreateWithoutApplicationsInput, TuitionUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: TuitionCreateOrConnectWithoutApplicationsInput
+    upsert?: TuitionUpsertWithoutApplicationsInput
+    connect?: TuitionWhereUniqueInput
+    update?: XOR<XOR<TuitionUpdateToOneWithWhereWithoutApplicationsInput, TuitionUpdateWithoutApplicationsInput>, TuitionUncheckedUpdateWithoutApplicationsInput>
+  }
+
+  export type TutorUpdateOneRequiredWithoutApplicationsNestedInput = {
+    create?: XOR<TutorCreateWithoutApplicationsInput, TutorUncheckedCreateWithoutApplicationsInput>
+    connectOrCreate?: TutorCreateOrConnectWithoutApplicationsInput
+    upsert?: TutorUpsertWithoutApplicationsInput
+    connect?: TutorWhereUniqueInput
+    update?: XOR<XOR<TutorUpdateToOneWithWhereWithoutApplicationsInput, TutorUpdateWithoutApplicationsInput>, TutorUncheckedUpdateWithoutApplicationsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -3798,6 +5722,396 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type TuitionApplicationCreateWithoutTutorInput = {
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tuition: TuitionCreateNestedOneWithoutApplicationsInput
+  }
+
+  export type TuitionApplicationUncheckedCreateWithoutTutorInput = {
+    id?: number
+    tuitionId: number
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TuitionApplicationCreateOrConnectWithoutTutorInput = {
+    where: TuitionApplicationWhereUniqueInput
+    create: XOR<TuitionApplicationCreateWithoutTutorInput, TuitionApplicationUncheckedCreateWithoutTutorInput>
+  }
+
+  export type TuitionApplicationCreateManyTutorInputEnvelope = {
+    data: TuitionApplicationCreateManyTutorInput | TuitionApplicationCreateManyTutorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TuitionApplicationUpsertWithWhereUniqueWithoutTutorInput = {
+    where: TuitionApplicationWhereUniqueInput
+    update: XOR<TuitionApplicationUpdateWithoutTutorInput, TuitionApplicationUncheckedUpdateWithoutTutorInput>
+    create: XOR<TuitionApplicationCreateWithoutTutorInput, TuitionApplicationUncheckedCreateWithoutTutorInput>
+  }
+
+  export type TuitionApplicationUpdateWithWhereUniqueWithoutTutorInput = {
+    where: TuitionApplicationWhereUniqueInput
+    data: XOR<TuitionApplicationUpdateWithoutTutorInput, TuitionApplicationUncheckedUpdateWithoutTutorInput>
+  }
+
+  export type TuitionApplicationUpdateManyWithWhereWithoutTutorInput = {
+    where: TuitionApplicationScalarWhereInput
+    data: XOR<TuitionApplicationUpdateManyMutationInput, TuitionApplicationUncheckedUpdateManyWithoutTutorInput>
+  }
+
+  export type TuitionApplicationScalarWhereInput = {
+    AND?: TuitionApplicationScalarWhereInput | TuitionApplicationScalarWhereInput[]
+    OR?: TuitionApplicationScalarWhereInput[]
+    NOT?: TuitionApplicationScalarWhereInput | TuitionApplicationScalarWhereInput[]
+    id?: IntFilter<"TuitionApplication"> | number
+    tuitionId?: IntFilter<"TuitionApplication"> | number
+    tutorId?: IntFilter<"TuitionApplication"> | number
+    message?: StringNullableFilter<"TuitionApplication"> | string | null
+    status?: StringFilter<"TuitionApplication"> | string
+    isRead?: BoolFilter<"TuitionApplication"> | boolean
+    createdAt?: DateTimeFilter<"TuitionApplication"> | Date | string
+    updatedAt?: DateTimeFilter<"TuitionApplication"> | Date | string
+  }
+
+  export type TuitionApplicationCreateWithoutTuitionInput = {
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tutor: TutorCreateNestedOneWithoutApplicationsInput
+  }
+
+  export type TuitionApplicationUncheckedCreateWithoutTuitionInput = {
+    id?: number
+    tutorId: number
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TuitionApplicationCreateOrConnectWithoutTuitionInput = {
+    where: TuitionApplicationWhereUniqueInput
+    create: XOR<TuitionApplicationCreateWithoutTuitionInput, TuitionApplicationUncheckedCreateWithoutTuitionInput>
+  }
+
+  export type TuitionApplicationCreateManyTuitionInputEnvelope = {
+    data: TuitionApplicationCreateManyTuitionInput | TuitionApplicationCreateManyTuitionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TuitionApplicationUpsertWithWhereUniqueWithoutTuitionInput = {
+    where: TuitionApplicationWhereUniqueInput
+    update: XOR<TuitionApplicationUpdateWithoutTuitionInput, TuitionApplicationUncheckedUpdateWithoutTuitionInput>
+    create: XOR<TuitionApplicationCreateWithoutTuitionInput, TuitionApplicationUncheckedCreateWithoutTuitionInput>
+  }
+
+  export type TuitionApplicationUpdateWithWhereUniqueWithoutTuitionInput = {
+    where: TuitionApplicationWhereUniqueInput
+    data: XOR<TuitionApplicationUpdateWithoutTuitionInput, TuitionApplicationUncheckedUpdateWithoutTuitionInput>
+  }
+
+  export type TuitionApplicationUpdateManyWithWhereWithoutTuitionInput = {
+    where: TuitionApplicationScalarWhereInput
+    data: XOR<TuitionApplicationUpdateManyMutationInput, TuitionApplicationUncheckedUpdateManyWithoutTuitionInput>
+  }
+
+  export type TuitionCreateWithoutApplicationsInput = {
+    description: string
+    district: string
+    location: string
+    year: string
+    subjects: string
+    salary: string
+    mode: string
+    postedById: string
+  }
+
+  export type TuitionUncheckedCreateWithoutApplicationsInput = {
+    id?: number
+    description: string
+    district: string
+    location: string
+    year: string
+    subjects: string
+    salary: string
+    mode: string
+    postedById: string
+  }
+
+  export type TuitionCreateOrConnectWithoutApplicationsInput = {
+    where: TuitionWhereUniqueInput
+    create: XOR<TuitionCreateWithoutApplicationsInput, TuitionUncheckedCreateWithoutApplicationsInput>
+  }
+
+  export type TutorCreateWithoutApplicationsInput = {
+    institution: string
+    subjects: string
+    year: string
+    name: string
+    email: string
+    location: string
+    sampleTeachingVideo: string
+    subjectToTeach: string
+    userId: string
+  }
+
+  export type TutorUncheckedCreateWithoutApplicationsInput = {
+    id?: number
+    institution: string
+    subjects: string
+    year: string
+    name: string
+    email: string
+    location: string
+    sampleTeachingVideo: string
+    subjectToTeach: string
+    userId: string
+  }
+
+  export type TutorCreateOrConnectWithoutApplicationsInput = {
+    where: TutorWhereUniqueInput
+    create: XOR<TutorCreateWithoutApplicationsInput, TutorUncheckedCreateWithoutApplicationsInput>
+  }
+
+  export type TuitionUpsertWithoutApplicationsInput = {
+    update: XOR<TuitionUpdateWithoutApplicationsInput, TuitionUncheckedUpdateWithoutApplicationsInput>
+    create: XOR<TuitionCreateWithoutApplicationsInput, TuitionUncheckedCreateWithoutApplicationsInput>
+    where?: TuitionWhereInput
+  }
+
+  export type TuitionUpdateToOneWithWhereWithoutApplicationsInput = {
+    where?: TuitionWhereInput
+    data: XOR<TuitionUpdateWithoutApplicationsInput, TuitionUncheckedUpdateWithoutApplicationsInput>
+  }
+
+  export type TuitionUpdateWithoutApplicationsInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
+    subjects?: StringFieldUpdateOperationsInput | string
+    salary?: StringFieldUpdateOperationsInput | string
+    mode?: StringFieldUpdateOperationsInput | string
+    postedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TuitionUncheckedUpdateWithoutApplicationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    district?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
+    subjects?: StringFieldUpdateOperationsInput | string
+    salary?: StringFieldUpdateOperationsInput | string
+    mode?: StringFieldUpdateOperationsInput | string
+    postedById?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TutorUpsertWithoutApplicationsInput = {
+    update: XOR<TutorUpdateWithoutApplicationsInput, TutorUncheckedUpdateWithoutApplicationsInput>
+    create: XOR<TutorCreateWithoutApplicationsInput, TutorUncheckedCreateWithoutApplicationsInput>
+    where?: TutorWhereInput
+  }
+
+  export type TutorUpdateToOneWithWhereWithoutApplicationsInput = {
+    where?: TutorWhereInput
+    data: XOR<TutorUpdateWithoutApplicationsInput, TutorUncheckedUpdateWithoutApplicationsInput>
+  }
+
+  export type TutorUpdateWithoutApplicationsInput = {
+    institution?: StringFieldUpdateOperationsInput | string
+    subjects?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    sampleTeachingVideo?: StringFieldUpdateOperationsInput | string
+    subjectToTeach?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TutorUncheckedUpdateWithoutApplicationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    institution?: StringFieldUpdateOperationsInput | string
+    subjects?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    sampleTeachingVideo?: StringFieldUpdateOperationsInput | string
+    subjectToTeach?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type TuitionApplicationCreateManyTutorInput = {
+    id?: number
+    tuitionId: number
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TuitionApplicationUpdateWithoutTutorInput = {
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tuition?: TuitionUpdateOneRequiredWithoutApplicationsNestedInput
+  }
+
+  export type TuitionApplicationUncheckedUpdateWithoutTutorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tuitionId?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TuitionApplicationUncheckedUpdateManyWithoutTutorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tuitionId?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TuitionApplicationCreateManyTuitionInput = {
+    id?: number
+    tutorId: number
+    message?: string | null
+    status?: string
+    isRead?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TuitionApplicationUpdateWithoutTuitionInput = {
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tutor?: TutorUpdateOneRequiredWithoutApplicationsNestedInput
+  }
+
+  export type TuitionApplicationUncheckedUpdateWithoutTuitionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tutorId?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TuitionApplicationUncheckedUpdateManyWithoutTuitionInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tutorId?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    isRead?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

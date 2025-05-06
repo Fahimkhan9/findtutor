@@ -149,7 +149,47 @@ const router=useRouter()
       {
         isTutorInfoLoading ? <div className="  flex flex-row min-h-screen justfiy-center items-center"><span className= "loading loading-bars loading-xl"></span></div>
           : <main className="flex-1  p-6 my-5">
-            
+            <div className="card my-5 w-full max-w-xl bg-base-100 shadow-xl">
+              <div className="card-body ">
+                <div className="card-title text-2xl text-center font-bold">All your application</div>
+                <div className="overflow-x-auto">
+  <table className="table">
+    {/* head */}
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Job</th>
+        <th>Favorite Color</th>
+      </tr>
+    </thead>
+    <tbody>
+      {/* row 1 */}
+      <tr>
+        <th>1</th>
+        <td>Cy Ganderton</td>
+        <td>Quality Control Specialist</td>
+        <td>Blue</td>
+      </tr>
+      {/* row 2 */}
+      <tr className="hover:bg-base-300">
+        <th>2</th>
+        <td>Hart Hagerty</td>
+        <td>Desktop Support Technician</td>
+        <td>Purple</td>
+      </tr>
+      {/* row 3 */}
+      <tr>
+        <th>3</th>
+        <td>Brice Swyre</td>
+        <td>Tax Accountant</td>
+        <td>Red</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+              </div>
+            </div>
             <br />
             {/* update profile */}
             <div className="max-w-2xl mx-auto card bg-base-100 shadow-xl p-6 space-y-6">

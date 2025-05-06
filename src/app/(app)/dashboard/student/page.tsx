@@ -1,7 +1,7 @@
 'use client'
 import ProfileSidebar from "@/components/ProfileSidebar";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Slide, toast } from "react-toastify";
 
@@ -19,6 +19,8 @@ const year = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'Ad
 export default function TutorProfileInputCard() {
     const [subjects, setSubjects] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const [isTuitionLoading,setIsTuitionLoading]=useState(false)
+    const [tuitions,setTuitions]=useState([])
     const { register, handleSubmit,formState:{isSubmitting} } = useForm<FormData>();
 
     const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
@@ -67,6 +69,23 @@ export default function TutorProfileInputCard() {
     const removeSubject = (index) => {
         setSubjects(subjects.filter((_, i) => i !== index));
     };
+    useEffect(()=>{
+        const load=async ()=>{
+            try {
+                setIsTuitionLoading(true)
+                const res=await axios.get('/api/tuition/getbyuser')
+                setTuitions(res.data.tuitions)
+                console.log(res.data.tuitions);
+                
+            } catch (error) {
+                
+            }finally{
+                setIsTuitionLoading(false)
+            }
+
+        }
+        load()
+    },[])
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
             <aside className="w-full md:w-64 bg-base-200 p-6 space-y-4">
@@ -82,34 +101,27 @@ export default function TutorProfileInputCard() {
     {/* head */}
     <thead>
       <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+     
+        <th>Description</th>
+        <th>Salary</th>
+        <th> Year</th>
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
+    
       {/* row 2 */}
-      <tr className="hover:bg-base-300">
-        <th>2</th>
-        <td>Hart Hagerty</td>
-        <td>Desktop Support Technician</td>
-        <td>Purple</td>
+      {
+        tuitions.length>0 && tuitions.map(i=>(
+            <tr key={i?.id} className="hover:bg-base-300">
+        
+        <td>{i?.description}</td>
+        <td>{i?.salary}</td>
+        <td>{i?.year}</td>
+
       </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-        <td>Red</td>
-      </tr>
+     
+        ))
+      }
     </tbody>
   </table>
 </div>

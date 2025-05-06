@@ -12,7 +12,7 @@ function Navbar() {
   const [logoutloading,setLogoutLoading]=useState(false)
   const {isSignedIn,isLoaded,user}=useUser()
   const {signOut}=useAuth()
-
+  const router=useRouter()
  
    
   const get=()=>{
@@ -27,7 +27,7 @@ function Navbar() {
         </>
       )
     }
-    const router=useRouter()
+
     const handlesignout=async()=>{
       try {
         setLogoutLoading(true)

@@ -24,6 +24,7 @@ model Tutor{
    sampleTeachingVideo String
    subjectToTeach String
    userId String
+   applications TuitionApplication[] 
 }
 
 model Tuition{
@@ -36,4 +37,21 @@ model Tuition{
   salary String
   mode String
   postedById String
+  applications TuitionApplication[] 
+}
+model TuitionApplication {
+  id         Int      @id @default(autoincrement())
+  tuitionId  Int
+  tutorId    Int
+  message    String?   // Optional
+  status     String    @default("pending")
+  isRead     Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  // Relations
+  tuition    Tuition   @relation(fields: [tuitionId], references: [id], onDelete: Cascade)
+  tutor      Tutor     @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+
+  @@unique([tuitionId, tutorId]) // Prevent duplicate applications
 }
