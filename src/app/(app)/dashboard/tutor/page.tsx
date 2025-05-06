@@ -1,12 +1,14 @@
 // CustomProfilePage.tsx
 'use client'
 import { useUser } from "@clerk/clerk-react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 import ProfileSidebar from "@/components/ProfileSidebar";
 import axios from "axios";
 import { Slide, toast } from "react-toastify";
-import { sub } from "framer-motion/m";
+import { CldVideoPlayer } from 'next-cloudinary';
+import 'next-cloudinary/dist/cld-video-player.css';
+import { useRouter } from "next/navigation";
 
 type FormData = {
   institution: string;
@@ -17,21 +19,47 @@ type FormData = {
   subjectToTeach: string;
 };
 
-export default function CustomProfilePage() {
+export default function TutorProfilePage() {
   const { user } = useUser();
   const [subjects, setSubjects] = useState([]);
   const [isSaving, setIsSaving] = useState(false);
   const [success, setSuccess] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const { register, handleSubmit, watch } = useForm<FormData>({
-    defaultValues: {
-      firstName: user?.firstName || "",
-      lastName: user?.lastName || "",
-    },
-  });
+  const [tutorInfo, setTutorInfo] = useState(null);
+  const [isTutorInfoLoading, setIsTutorInfoLoading] = useState(false);
+  const { register, handleSubmit,reset,control } = useForm<FormData>();
+  
+  useEffect(() => {
+    const fetchTutorInfo = async () => {
+      try {
+        setIsTutorInfoLoading(true);
+        const res = await axios.get('/api/tutor/get')
+        setTutorInfo(res.data.tutor)
+        
+        res.data.tutor.subjectToTeach.split(',').map(i=>setSubjects((prev)=>[...prev,i]))
+        reset({
+          institution:res.data.tutor.institution,
+          location:res.data.tutor.location,
+          sampleTeachingVideo:res.data.tutor.sampleTeachingVideo,
+          subjects:res.data.tutor.subjects,
+          year:res.data.tutor.year,
+          // subjectToTeach:res.data.tutor.subjectToTeach.split(',')
+        })
+      } catch (error) {
+        console.log(error);
 
- 
-  const onSubmit:SubmitHandler<FormData> = async (data: FormData) => {
+      } finally {
+        setIsTutorInfoLoading(false);
+
+      }
+    }
+    fetchTutorInfo()
+
+  }, [reset])
+const router=useRouter()
+
+
+  const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
     if (!user) return;
 
     setIsSaving(true);
@@ -48,13 +76,23 @@ export default function CustomProfilePage() {
       formData.append("name", user.username);
       formData.append("email", user.emailAddresses[0].emailAddress);
       formData.append("subjectToTeach", subjects.join(","));
-      
-      const res=await axios.post('/api/tutor/create',formData)
-      console.log(res.data);
-      if(res.data.success){
+
+      const res = await axios.post('/api/tutor/create', formData)
+     
+      res.data.tutor.subjectToTeach.split(',').map(i=>setSubjects((prev)=>[...prev,i]))
+      reset({
+        institution:res.data.tutor.institution,
+        location:res.data.tutor.location,
+        sampleTeachingVideo:res.data.tutor.sampleTeachingVideo,
+        subjects:res.data.tutor.subjects,
+        year:res.data.tutor.year,
+        // subjectToTeach:res.data.tutor.subjectToTeach.split(',')
+      })
+      if (res.data.success) {
         setSuccess(true);
         setInputValue('');
         setSubjects([]);
+        // router.push('/')
         toast.success('Tutor info updated successfully!', {
           position: "top-right",
           autoClose: 5000,
@@ -65,10 +103,10 @@ export default function CustomProfilePage() {
           progress: undefined,
           theme: "colored",
           transition: Slide,
-          });
-       
+        });
+
       }
-     
+
     } catch (err) {
       console.error("Update failed:", err);
       toast.error('Error while updating tutor info', {
@@ -81,7 +119,7 @@ export default function CustomProfilePage() {
         progress: undefined,
         theme: "colored",
         transition: Slide,
-        });
+      });
     } finally {
       setIsSaving(false);
     }
@@ -89,7 +127,7 @@ export default function CustomProfilePage() {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
-      const trimmed = inputValue.trim();
+      const trimmed = inputValue.trim().toLocaleUpperCase();
       if (trimmed && !subjects.includes(trimmed)) {
         setSubjects([...subjects, trimmed]);
       }
@@ -104,122 +142,137 @@ export default function CustomProfilePage() {
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-base-200 p-6 space-y-4">
-      
-        <ProfileSidebar/>
+
+        <ProfileSidebar />
       </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-6">
-        <div className="max-w-2xl mx-auto card bg-base-100 shadow-xl p-6 space-y-6">
-          <h2 className="text-xl font-semibold text-center">Set your Tutor Profile</h2>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    
+      {
+        isTutorInfoLoading ? <div className="  flex flex-row min-h-screen justfiy-center items-center"><span className= "loading loading-bars loading-xl"></span></div>
+          : <main className="flex-1  p-6 my-5">
             
-           < h2 className="text-lg font-semibold">Academics Information</h2>
-            <div className="form-control">
-              <label className="label text-sm">Current Institution</label>
-              <br />
-              <input
-              {...register("institution", { required: true })}
-                type="text"
-                placeholder="Enter your current institution"
-                className="input input-bordered"
-              />
-            </div>
+            <br />
+            {/* update profile */}
+            <div className="max-w-2xl mx-auto card bg-base-100 shadow-xl p-6 space-y-6">
+              <h2 className="text-xl font-semibold text-center">Update your Tutor Profile</h2>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
-            <div className="form-control">
-              <label className="label text-sm">Subject</label>
-              <br />
+                < h2 className="text-lg font-semibold">Academics Information</h2>
+                <div className="form-control">
+                  <label className="label text-sm">Current Institution</label>
+                  <br />
+                  <input
+                    {...register("institution", { required: true })}
+                    type="text"
+                   
+                    placeholder="Enter your current institution"
+                    className="input input-bordered"
+                  />
+                  
+                </div>
 
-              <input
-              {...register("subjects", { required: true })}
+                <div className="form-control">
+                  <label className="label text-sm">Subject</label>
+                  <br />
 
-                type="text"
-                placeholder="Enter your subject(ex: CSE,EEE,BBA etc )"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label text-sm">Current year</label>
-              <br />
+                  <input
+                    {...register("subjects", { required: true })}
 
-              <input
-                {...register("year", { required: true })}
-                type="text"
-                placeholder="Enter your current year"
-                className="input input-bordered"
-              />
-            </div>
-             
-           < h2 className="text-lg font-semibold">Preferred Subjects </h2>
-           <div className="form-control">
-              <label className="label text-sm">Subject you want to teach</label>
-              <br />
-            <div className="flex flex-wrap items-center gap-2 border border-base-300 rounded p-2 bg-base-100 focus-within:ring ring-primary">
-            {subjects.map((subject, index) => (
-          <div
-            key={index}
-            className="badge badge-accent rounded-lg gap-2"
-          >
-            {subject}
-            <button
-              onClick={() => removeSubject(index)}
-              className="ml-1 text-white hover:text-red-300"
-              type="button"
-            >
-              ✕
-            </button>
-          </div>
-        ))}
-              
-             
-            </div>
-            <input
-  {...register("subjectToTeach", { required: subjects.length<=0 })}
-              type="text"
-          id="subjectsToTeach"
-          name="subjectsToTeach"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Type and press Enter to add"
-           className="input input-bordered my-2"
-        />
-            </div>
-            < h2 className="text-lg font-semibold">Others </h2>
-           <div className="form-control">
-              <label className="label text-sm">Location</label>
-              <br />
+                    type="text"
+                    placeholder="Enter your subject(ex: CSE,EEE,BBA etc )"
+                    className="input input-bordered"
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label text-sm">Current year</label>
+                  <br />
 
-              <input
-                {...register("location", { required: true })}
-                type="text"
-                placeholder="Enter your location"
-                className="input input-bordered"
-              />
-            </div>
-            <div className="form-control">
-              <label className="label text-sm">Enter a sample video for your teaching</label>
-              <br />
+                  <input
+                    {...register("year", { required: true })}
+                    type="text"
+                    placeholder="Enter your current year"
+                    className="input input-bordered"
+                  />
+                </div>
 
-              <input
-                {...register("sampleTeachingVideo", { required: true })}
-                type="file"
-               
-                className="input input-bordered"
-              />
-            </div>
-            <button type="submit" className="btn btn-primary w-full" disabled={isSaving}>
-              {isSaving ? "Saving..." : "Save Changes"}
-            </button>
+                < h2 className="text-lg font-semibold">Preferred Subjects </h2>
+                <div className="form-control">
+                  <label className="label text-sm">Subject you want to teach</label>
+                  <br />
+                  <div className="flex flex-wrap items-center gap-2 border border-base-300 rounded p-2 bg-base-100 focus-within:ring ring-primary">
+                    {subjects.map((subject, index) => (
+                      <div
+                        key={index}
+                        className="badge badge-accent rounded-lg gap-2"
+                      >
+                        {subject}
+                        <button
+                          onClick={() => removeSubject(index)}
+                          className="ml-1 text-white hover:text-red-300"
+                          type="button"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
 
-            {success && (
-              <div className="text-success text-center">
-                Profile updated successfully!
-              </div>
-            )}
-          </form>
-        </div>
-      </main>
+
+                  </div>
+                 
+                  
+                  <input
+                    {...register("subjectToTeach", { required: subjects.length <= 0 })}
+                    type="text"
+                    id="subjectsToTeach"
+                    name="subjectsToTeach"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Type and press Enter to add"
+                    className="input input-bordered my-2"
+                  />
+                </div>
+                < h2 className="text-lg font-semibold">Others </h2>
+                <div className="form-control">
+                  <label className="label text-sm">Location</label>
+                  <br />
+
+                  <input
+                    {...register("location", { required: true })}
+                    type="text"
+                    placeholder="Enter your location"
+                    className="input input-bordered"
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label text-sm">Enter a sample video for your teaching</label>
+                  <br />
+                  {tutorInfo?.sampleTeachingVideo && <CldVideoPlayer
+                  width="1920"
+                  height="1080"
+                  src={tutorInfo?.sampleTeachingVideo}
+                />}
+                  <input
+                     {...register("sampleTeachingVideo")}
+                    type="file"
+                    accept="video/mp4"
+                    className="input input-bordered my-4"
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary w-full" disabled={isSaving}>
+                  {isSaving ? "Saving..." : "Save Changes"}
+                </button>
+
+                {success && (
+                  <div className="text-success text-center">
+                    Tutor Profile updated successfully!
+                  </div>
+                )}
+              </form>
+            </div>
+          </main>
+
+      }
+
     </div>
   );
 }
