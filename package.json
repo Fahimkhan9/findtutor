@@ -9,12 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.18.5",
+    "@prisma/client": "^6.7.0",
+    "axios": "^1.9.0",
+    "cloudinary": "^2.6.1",
     "daisyui": "^5.0.35",
     "framer-motion": "^12.9.4",
     "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.2",
     "react-simple-typewriter": "^5.0.1",
+    "react-toastify": "^11.0.5",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {
@@ -25,6 +31,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "prisma": "^6.7.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
