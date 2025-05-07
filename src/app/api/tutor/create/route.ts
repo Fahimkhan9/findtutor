@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
                     subjects: subjects.toString(),
                     location: location.toString(),
                     year: year.toString(),
-                    sampleTeachingVideo: String(result?.secure_url) || '',
+                    sampleTeachingVideo:  '',
                     subjectToTeach: subjectToTeach.toString(),
                     email: email.toString(),
                     name: name.toString(),

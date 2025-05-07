@@ -1,6 +1,7 @@
 'use client'
 import ProfileSidebar from "@/components/ProfileSidebar";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Slide, toast } from "react-toastify";
@@ -19,14 +20,15 @@ const year = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'Ad
 export default function TutorProfileInputCard() {
     const [subjects, setSubjects] = useState([]);
     const [inputValue, setInputValue] = useState('');
-    const [isTuitionLoading,setIsTuitionLoading]=useState(false)
-    const [tuitions,setTuitions]=useState([])
-    const { register, handleSubmit,formState:{isSubmitting} } = useForm<FormData>();
+    const [isTuitionLoading, setIsTuitionLoading] = useState(false)
+    const [tuitions, setTuitions] = useState([])
+    const [currentModalDetails, setCurrentModalDetails] = useState({})
+    const { register, handleSubmit, formState: { isSubmitting } } = useForm<FormData>();
 
     const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
-     
+
         try {
-            const values={
+            const values = {
                 location: data.location,
                 district: data.district,
                 mode: data.mode,
@@ -36,8 +38,8 @@ export default function TutorProfileInputCard() {
                 description: data.description
             }
             console.log(values);
-           
-            const res=await axios.post('/api/tuition/create',values)
+
+            const res = await axios.post('/api/tuition/create', values)
             console.log(res.data);
             toast.success('Posted successfully!', {
                 position: "top-right",
@@ -49,10 +51,10 @@ export default function TutorProfileInputCard() {
                 progress: undefined,
                 theme: "colored",
                 transition: Slide,
-              });
+            });
         } catch (error) {
             console.log(error);
-            
+
         }
     };
     const handleKeyDown = (e) => {
@@ -69,23 +71,33 @@ export default function TutorProfileInputCard() {
     const removeSubject = (index) => {
         setSubjects(subjects.filter((_, i) => i !== index));
     };
-    useEffect(()=>{
-        const load=async ()=>{
+    useEffect(() => {
+        const load = async () => {
             try {
                 setIsTuitionLoading(true)
-                const res=await axios.get('/api/tuition/getbyuser')
+                const res = await axios.get('/api/tuition/getbyuser')
                 setTuitions(res.data.tuitions)
                 console.log(res.data.tuitions);
-                
+
             } catch (error) {
-                
-            }finally{
+
+            } finally {
                 setIsTuitionLoading(false)
             }
 
         }
         load()
-    },[])
+    }, [])
+    const showModal = (item: any) => {
+
+        setCurrentModalDetails(() => item)
+
+
+        const modal = document.getElementById('s_modal');
+        if (modal) {
+            modal.showModal();
+        }
+    }
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
             <aside className="w-full md:w-64 bg-base-200 p-6 space-y-4">
@@ -95,41 +107,46 @@ export default function TutorProfileInputCard() {
                 <div className="flex flex-col justify-center items-center min-h-screen bg-base-200">
                     <div className="card my-5 w-full max-w-xl bg-base-100 shadow-xl">
                         <div className="card-body">
-                        <h2 className="card-title text-2xl text-center font-bold">All tuition posts</h2>
-                        <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-     
-        <th>Description</th>
-        <th>Salary</th>
-        <th> Year</th>
-      </tr>
-    </thead>
-    <tbody>
-    
-      {/* row 2 */}
-      {
-        tuitions.length>0 && tuitions.map(i=>(
-            <tr key={i?.id} className="hover:bg-base-300">
-        
-        <td>{i?.description}</td>
-        <td>{i?.salary}</td>
-        <td>{i?.year}</td>
+                            <h2 className="card-title text-2xl text-center font-bold">All tuition posts</h2>
+                            <div className="overflow-x-auto">
+                                <table className="table">
+                                    {/* head */}
+                                    <thead>
+                                        <tr>
 
-      </tr>
-     
-        ))
-      }
-    </tbody>
-  </table>
-</div>
+                                            <th>Description</th>
+                                            <th>Salary</th>
+                                            <th> Year</th>
+                                            <th>Applications</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {/* row 2 */}
+                                        {
+                                            tuitions.length > 0 && tuitions.map(i => (
+                                                <tr key={i?.id} className="hover:bg-base-300">
+
+                                                    <td>{i?.description}</td>
+                                                    <td>{i?.salary}</td>
+                                                    <td>{i?.year}</td>
+                                                    <td >
+                                                        <button onClick={() => showModal(i)} className="btn bg-primary text-primary-content">See</button>
+
+
+                                                    </td>
+                                                </tr>
+
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
                     </div>
-                
-               
+
+
                     <div className="card w-full max-w-xl bg-base-100 shadow-xl">
                         <div className="card-body">
                             <h2 className="card-title text-2xl text-center font-bold">Find your desired Tutor</h2>
@@ -248,7 +265,7 @@ export default function TutorProfileInputCard() {
                                     </label>
                                     <br />
                                     <textarea
-                                    rows={5}
+                                        rows={5}
                                         type="text"
                                         placeholder="e.g. 5000"
                                         className="input input-bordered"
@@ -263,8 +280,86 @@ export default function TutorProfileInputCard() {
                         </div>
                     </div>
                 </div>
+                <Modal
+                    currentModalDetails={currentModalDetails}
+                />
             </main>
         </div>
 
     );
+}
+
+const Modal = (props) => {
+    console.log(props);
+    const { currentModalDetails } = props
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const handleStatus = async (applicationId:any) => {
+        try {
+            setIsSubmitting(true)
+            const data={
+                applicationId
+            }
+            const res = await axios.patch('/api/tuition-application/accept',data)
+            console.log(res.data);
+
+        } catch (error) {
+
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
+    return (
+
+
+        <dialog id="s_modal" className="modal">
+            <div className="modal-box w-11/12 max-w-5xl">
+
+                <p className="py-4">{currentModalDetails?.description}</p>
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+
+                                <th>Name</th>
+                                <th>Job</th>
+                                <th>Teacher Email</th>
+                                <th>Teacher Profile</th>
+                                <th>Accept</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {/* row 2 */}
+                            {
+                                currentModalDetails?.applications?.length > 0 && currentModalDetails?.applications.map(i => (
+                                    <tr key={i?.id} className="hover:bg-base-300">
+
+                                        <td>{i?.message}</td>
+                                        <td>{i?.status}</td>
+                                        <td>{i?.tutor?.email}</td>
+                                        <td>
+                                            <button className="btn">
+                                                <Link href={`/${i?.tutor?.email}`}>Profile</Link>
+                                            </button>
+                                        </td>
+                                        <td><button disabled={isSubmitting} className="btn" onClick={() => handleStatus(i?.id)}>Accept</button></td>
+                                    </tr>
+                                ))
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <div className="modal-action">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+    )
 }

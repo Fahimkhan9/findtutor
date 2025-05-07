@@ -1,5 +1,4 @@
-import ProfileCard from '@/components/ProfileCard'
-import ProfileSidebar from '@/components/ProfileSidebar'
+
 import { UserProfile } from '@clerk/nextjs'
 import React from 'react'
 

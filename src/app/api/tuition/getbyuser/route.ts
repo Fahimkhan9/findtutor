@@ -17,6 +17,13 @@ export async function GET(req: NextRequest) {
         const tuitions=await  prisma.tuition.findMany({
             where:{
                 postedById:userId
+            },
+            include:{
+                applications:{
+                    include:{
+                        tutor:true
+                    }
+                }
             }
         })
 

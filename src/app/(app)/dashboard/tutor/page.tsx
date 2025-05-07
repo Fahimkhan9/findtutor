@@ -27,6 +27,7 @@ export default function TutorProfilePage() {
   const [inputValue, setInputValue] = useState('');
   const [tutorInfo, setTutorInfo] = useState(null);
   const [isTutorInfoLoading, setIsTutorInfoLoading] = useState(false);
+  const [tuitionApplications,setTuitionApplications]=useState([])
   const { register, handleSubmit,reset,control } = useForm<FormData>();
   
   useEffect(() => {
@@ -34,6 +35,9 @@ export default function TutorProfilePage() {
       try {
         setIsTutorInfoLoading(true);
         const res = await axios.get('/api/tutor/get')
+        const tuitions=await axios.get(`/api/tuition-application/getbytutor?tutorId=${res.data.tutor?.id}`)
+        console.log(tuitions.data);
+        setTuitionApplications(tuitions.data.applications)
         setTutorInfo(res.data.tutor)
         
         res.data.tutor.subjectToTeach.split(',').map(i=>setSubjects((prev)=>[...prev,i]))
@@ -149,7 +153,7 @@ const router=useRouter()
       {
         isTutorInfoLoading ? <div className="  flex flex-row min-h-screen justfiy-center items-center"><span className= "loading loading-bars loading-xl"></span></div>
           : <main className="flex-1  p-6 my-5">
-            <div className="card my-5 w-full max-w-xl bg-base-100 shadow-xl">
+            <div className="card my-5 w-full max-w-2xl mx-auto card bg-base-100 shadow-xl p-6 space-y-6">
               <div className="card-body ">
                 <div className="card-title text-2xl text-center font-bold">All your application</div>
                 <div className="overflow-x-auto">
@@ -157,34 +161,28 @@ const router=useRouter()
     {/* head */}
     <thead>
       <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
+        
+        <th>Message sent</th>
+        <th>Status</th>
+        <th>Tuition Description</th>
+        <th>Student Email</th>
+
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      {/* row 2 */}
-      <tr className="hover:bg-base-300">
-        <th>2</th>
-        <td>Hart Hagerty</td>
-        <td>Desktop Support Technician</td>
-        <td>Purple</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-        <td>Red</td>
-      </tr>
+   
+   
+      {
+        tuitionApplications?.length>0 && tuitionApplications.map(i=>(<tr className="hover:bg-base-300">
+        
+          <td>{i?.message}</td>
+          <td>{i?.status}</td>
+          <td>{i?.tuition?.description}</td>
+          <td>{i?.tuition?.postedBy?.email}</td>
+
+        </tr>))
+      }
+     
     </tbody>
   </table>
 </div>
