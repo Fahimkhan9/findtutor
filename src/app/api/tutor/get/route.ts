@@ -3,14 +3,9 @@ import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
 
-import { v2 as cloudinary } from "cloudinary";
 
 const prisma = new PrismaClient()
-cloudinary.config({
-    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-})
+
 export async function GET(req: NextRequest) {
     try {
         const { userId } = await getAuth(req)

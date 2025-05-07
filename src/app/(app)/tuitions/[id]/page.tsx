@@ -1,5 +1,6 @@
 'use client'
 import TuitionCard from '@/components/TuitionCard'
+import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -34,6 +35,8 @@ const tuitions = [
 function TuitionDetailsPage({ params }) {
   const [isTuitionLoading, setIsTuitionLoading] = useState(false)
   const [tuitions, setTuitions] = useState({})
+  const [tutorProfile, setTutorProfile] = useState(null);
+  const {user}=useUser()
   const { id } = params
   console.log(id);
   const router=useRouter()
@@ -42,6 +45,8 @@ function TuitionDetailsPage({ params }) {
       try {
         setIsTuitionLoading(true)
         const res = await axios.post('/api/tuition/getbyid', { id })
+        const tutorRes=await axios.get('/api/tutor/get')
+        setTutorProfile(tutorRes.data?.tutor || null)
         setTuitions(res.data.tuition)
       } catch (error) {
         console.log(error);
@@ -55,14 +60,21 @@ function TuitionDetailsPage({ params }) {
   const {register,handleSubmit,formState:{isSubmitting}}=useForm()
   const onSubmit=async (values)=>{
     try {
-      const data={
-        message:values.message,
-        tuitionId:Number(id)
+      if (tutorProfile) {
+        const data={
+          message:values.message,
+          tuitionId:Number(id)
+        }
+        console.log(data);
+       const res= await axios.post('/api/tuition-application/create',data)
+       console.log(res.data);
+       router.push('/dashboard/tutor')
+        
+      }else{
+        alert('Please create your tutor profile before applying.');
+      router.push("/dashboard/tutor")
       }
-      console.log(data);
-     const res= await axios.post('/api/tuition-application/create',data)
-     console.log(res.data);
-     router.push('/dashboard/tutor')
+      
     } catch (error) {
       console.log(error);
       
@@ -91,12 +103,14 @@ function TuitionDetailsPage({ params }) {
               </div>
 
               <button
-              disabled={isSubmitting}
+              disabled={isSubmitting || (user?.id ===tuitions.postedById) }
                 type="submit"
                 className="bg-primary text-primary-content btn"
               >
                 Send Message
               </button>
+              <br />
+              {user?.id ===tuitions.postedById && <span className='text-xl text-danger'>You cannot apply to own tuition posts</span>}
             </form>
           </div>
         </>

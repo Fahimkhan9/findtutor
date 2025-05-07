@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         });
 
         if (!tutor) {
-            return NextResponse.json({ msg: 'Tutor profile not found.', success: false }, { status: 404 });
+            return NextResponse.json({ msg: 'Tutor profile not found.', success: false,code:"TUTOR_PROFILE_REQUIRED" }, { status: 404 });
         }
 
         const tutorId = tutor.id;

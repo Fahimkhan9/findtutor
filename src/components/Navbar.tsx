@@ -68,7 +68,7 @@ function Navbar() {
         <li className='mb-2  link text-xl'>
           
             <Link href='/profile' >Profile </Link>
-            <Link href='/dashboard' >Dashboard </Link>
+            <Link href='/dashboard/student' >Dashboard </Link>
             
          
         </li>
