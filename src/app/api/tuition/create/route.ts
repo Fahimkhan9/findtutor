@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
             mode:mode.toString(),
             year:year.toString(),
             subjects:subjects.toString(),
-            salary:salary.toString(),
+            salary:Number(salary),
             description:description.toString(),
             postedById:userId
             }

@@ -17,6 +17,12 @@ function TuitionCard({tuition,single}) {
         <p><span className="font-semibold">Student Class:</span> {tuition.year}</p>
         <p><span className="font-semibold">Mode:</span> <span className={modeBadgeClass}>{tuition.mode}</span></p>
         <p><span className="font-semibold">Salary:</span> ৳{tuition.salary}/month</p>
+        <p><span className="font-semibold">Subject:</span> 
+        {
+          tuition?.subjects.split(',').map((i)=><div  className='badge badge-accent rounded-lg gap-2 mx-1'>{i}</div>)
+        }
+        </p>
+
       </div>
   
       <div className="mt-2">
@@ -33,6 +39,8 @@ function TuitionCard({tuition,single}) {
   </div>
   <div>
     <p className="text-sm font-medium">{tuition?.user?.username}</p>
+    <p className="text-sm font-medium">{tuition?.user?.email}</p>
+
     <p className="text-xs text-gray-500">Posted by</p>
   </div>
 </div>

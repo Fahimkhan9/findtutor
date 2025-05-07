@@ -130,7 +130,9 @@ exports.Prisma.TutorScalarFieldEnum = {
   location: 'location',
   sampleTeachingVideo: 'sampleTeachingVideo',
   subjectToTeach: 'subjectToTeach',
-  userId: 'userId'
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.TuitionScalarFieldEnum = {
@@ -142,7 +144,9 @@ exports.Prisma.TuitionScalarFieldEnum = {
   subjects: 'subjects',
   salary: 'salary',
   mode: 'mode',
-  postedById: 'postedById'
+  postedById: 'postedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.TuitionApplicationScalarFieldEnum = {

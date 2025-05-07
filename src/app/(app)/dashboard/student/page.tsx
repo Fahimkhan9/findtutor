@@ -2,6 +2,7 @@
 import ProfileSidebar from "@/components/ProfileSidebar";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Slide, toast } from "react-toastify";
@@ -24,7 +25,7 @@ export default function TutorProfileInputCard() {
     const [tuitions, setTuitions] = useState([])
     const [currentModalDetails, setCurrentModalDetails] = useState({})
     const { register, handleSubmit, formState: { isSubmitting } } = useForm<FormData>();
-
+    const router=useRouter()
     const onSubmit: SubmitHandler<FormData> = async (data: FormData) => {
 
         try {
@@ -52,6 +53,7 @@ export default function TutorProfileInputCard() {
                 theme: "colored",
                 transition: Slide,
             });
+            router.push('/tuitions')
         } catch (error) {
             console.log(error);
 
@@ -108,7 +110,8 @@ export default function TutorProfileInputCard() {
                     <div className="card my-5 w-full max-w-xl bg-base-100 shadow-xl">
                         <div className="card-body">
                             <h2 className="card-title text-2xl text-center font-bold">All tuition posts</h2>
-                            <div className="overflow-x-auto">
+                            {
+                                isTuitionLoading ? <span className="loading loading-lg"></span>:<div className="overflow-x-auto">
                                 <table className="table">
                                     {/* head */}
                                     <thead>
@@ -142,6 +145,8 @@ export default function TutorProfileInputCard() {
                                     </tbody>
                                 </table>
                             </div>
+                            }
+                            
 
                         </div>
                     </div>

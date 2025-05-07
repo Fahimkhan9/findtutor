@@ -23,6 +23,8 @@ function ProfileSidebar() {
                         </li>
                         <li className='link text-lg hover:bg-accent hover:text-accent-content bg-base-500'><Link href='/dashboard/student'>student</Link>
                         </li>
+                        <li className='link text-lg hover:bg-accent hover:text-accent-content bg-base-500'><Link href='/tuitions'>Tuitions</Link>
+                        </li>
                     </ul>
                 </div>
             </div>
