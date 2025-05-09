@@ -56,7 +56,8 @@ function Navbar() {
 
 <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
+        <div className="ring-primary ring-offset-base-100 w-32 rounded">
+          
           <img
             alt={user.username || 'User'}
             src={user.imageUrl} />
