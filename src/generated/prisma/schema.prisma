@@ -15,14 +15,68 @@ datasource db {
 }
 
 model Tutor {
-  id                  Int    @id @default(autoincrement())
+  id                  Int                  @id @default(autoincrement())
   institution         String
   subjects            String
   year                String
   name                String
-  email               String @unique
+  email               String               @unique
   location            String
   sampleTeachingVideo String
   subjectToTeach      String
   userId              String
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  applications        TuitionApplication[]
+}
+
+model Tuition {
+  id           Int                  @id @default(autoincrement())
+  description  String
+  district     String
+  location     String
+  year         String
+  subjects     String
+  salary       Int
+  mode         String
+  postedById   String
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  applications TuitionApplication[]
+}
+
+model TuitionApplication {
+  id        Int      @id @default(autoincrement())
+  tuitionId Int
+  tutorId   Int
+  message   String? // Optional
+  status    String   @default("pending")
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  tuition Tuition @relation(fields: [tuitionId], references: [id], onDelete: Cascade)
+  tutor   Tutor   @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+
+  @@unique([tuitionId, tutorId]) // Prevent duplicate applications
+}
+
+model Conversation {
+  id        Int      @id @default(autoincrement())
+  user1Id   String // Clerk user ID
+  user2Id   String // Clerk user ID
+  createdAt DateTime @default(now())
+
+  messages ChatMessage[]
+}
+
+model ChatMessage {
+  id             Int           @id @default(autoincrement())
+  senderId       String // Clerk user ID
+  receiverId     String // Clerk user ID
+  message        String
+  createdAt      DateTime      @default(now())
+  conversation   Conversation? @relation(fields: [conversationId], references: [id])
+  conversationId Int?
 }

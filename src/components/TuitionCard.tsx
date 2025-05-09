@@ -19,7 +19,7 @@ function TuitionCard({tuition,single}) {
         <p><span className="font-semibold">Salary:</span> ৳{tuition.salary}/month</p>
         <p><span className="font-semibold">Subject:</span> 
         {
-          tuition?.subjects.split(',').map((i)=><div  className='badge badge-accent rounded-lg gap-2 mx-1'>{i}</div>)
+          tuition?.subjects?.split(',').map((i)=><div  className='badge badge-accent rounded-lg gap-2 mx-1'>{i}</div>)
         }
         </p>
 
@@ -44,8 +44,9 @@ function TuitionCard({tuition,single}) {
     <p className="text-xs text-gray-500">Posted by</p>
   </div>
 </div>
-      <div className="card-actions justify-end mt-4">
-      {!single &&   <button className="btn btn-sm btn-primary">
+      <div className="card-actions justify-between mt-4">
+        <div className="p-2 rounded-lg bg-base-200 text-white">{tuition?.applications?.length} Tutors Requested</div>
+      {!single &&   <button className="btn py-4 btn-sm btn-primary">
           <Link href={`/tuitions/${tuition.id}`}> Apply
           </Link>
          

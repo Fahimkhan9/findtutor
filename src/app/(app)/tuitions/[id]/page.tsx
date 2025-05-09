@@ -3,7 +3,7 @@ import TuitionCard from '@/components/TuitionCard'
 import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 const tuitions = [
   {
@@ -32,12 +32,12 @@ const tuitions = [
   },
   // More entries...
 ];
-function TuitionDetailsPage({ params }) {
+function TuitionDetailsPage({  params }: { params: Promise<{ id: string }> }) {
   const [isTuitionLoading, setIsTuitionLoading] = useState(false)
   const [tuitions, setTuitions] = useState({})
   const [tutorProfile, setTutorProfile] = useState(null);
   const {user}=useUser()
-  const { id } = params
+  const { id } = use(params)
   console.log(id);
   const router=useRouter()
   useEffect(() => {
@@ -61,14 +61,23 @@ function TuitionDetailsPage({ params }) {
   const onSubmit=async (values)=>{
     try {
       if (tutorProfile) {
-        const data={
-          message:values.message,
-          tuitionId:Number(id)
+        const exists=tuitions?.applications.find(i=>i?.tutorId===tutorProfile?.id)
+       
+        if(exists?.id){
+          alert("you have applied already for this tuition posts")
+          router.push('/tuitions')
+          return;
+        }else{
+          const data={
+            message:values.message,
+            tuitionId:Number(id)
+          }
+          console.log(data);
+         const res= await axios.post('/api/tuition-application/create',data)
+         console.log(res.data);
+         router.push('/dashboard/tutor')
         }
-        console.log(data);
-       const res= await axios.post('/api/tuition-application/create',data)
-       console.log(res.data);
-       router.push('/dashboard/tutor')
+        
         
       }else{
         alert('Please create your tutor profile before applying.');
@@ -82,6 +91,8 @@ function TuitionDetailsPage({ params }) {
 
     }
   }
+  
+  
   return (
     <div className="flex flex-col lg:flex-row gap-6 p-6 max-w-6xl mx-auto">
       {

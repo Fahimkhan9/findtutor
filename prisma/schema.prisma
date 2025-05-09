@@ -61,3 +61,20 @@ model TuitionApplication {
 
   @@unique([tuitionId, tutorId]) // Prevent duplicate applications
 }
+model Conversation {
+  id        Int      @id @default(autoincrement())
+  user1Id   String   // Clerk user ID
+  user2Id   String   // Clerk user ID
+  createdAt DateTime @default(now())
+
+  messages  ChatMessage[]
+}
+model ChatMessage {
+  id            Int      @id @default(autoincrement())
+  senderId      String   // Clerk user ID
+  receiverId    String   // Clerk user ID
+  message       String
+  createdAt     DateTime @default(now())
+  conversation  Conversation? @relation(fields: [conversationId], references: [id])
+  conversationId Int?
+}

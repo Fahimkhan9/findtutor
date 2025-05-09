@@ -21,6 +21,9 @@ export async function GET(req: NextRequest) {
         skip,
         take: limit,
         orderBy: { createdAt: "desc" },
+        include:{
+          applications:true
+        }
       }),
       prisma.tuition.count(),
     ]);
@@ -43,7 +46,8 @@ export async function GET(req: NextRequest) {
           : null,
       };
     });
-
+    console.log(tuitionWithUser);
+    
     return NextResponse.json({
       tuitions: tuitionWithUser,
       page,

@@ -5,6 +5,7 @@
 import { motion } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
 import heroimg from '@/assets/9571032-removebg-preview.png'
+import Link from 'next/link';
 export default function Hero() {
   return (
     <>
@@ -36,10 +37,10 @@ export default function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <button className="btn bg-primary text-primary-content rounded-lg shadow-md hover:scale-105 transition duration-300">
-              Find a Tutor
+              <Link href='/dashboard/student'>Find a Tutor</Link>
             </button>
             <button className="btn bg-accent text-accent-content rounded-lg shadow-md hover:scale-105 transition duration-300">
-              Become a Tutor
+            <Link href='/dashboard/tutor'>  Become a Tutor</Link>
             </button>
           </div>
         </motion.div>
@@ -126,7 +127,7 @@ export default function Hero() {
           Ready to Get Started?
         </h2>
         <p className="text-lg mb-8">
-          Join hundreds of students and tutors already using <span className="font-semibold text-secondaru">var(--color-secondaryFindTutor</span>.
+          Join hundreds of students and tutors already using <span className="font-semibold text-secondary">FindTutor</span>.
           It only takes a minute to sign up.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

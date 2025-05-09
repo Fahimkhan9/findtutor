@@ -46,7 +46,7 @@ function TuitionPage() {
   const fetchTuitions = async (pageNum: number) => {
       try {
         setIsTuitionLoading(true)
-        const res=await axios.get(`/api/tuition/search?page=${pageNum}&limit=10`)
+        const res=await axios.get(`/api/tuition/get?page=${pageNum}&limit=10`)
         setTuitions(res.data.tuitions);
         setTotalPages(res.data.totalPages);
         setPage(res.data.page);

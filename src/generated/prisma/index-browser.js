@@ -160,6 +160,22 @@ exports.Prisma.TuitionApplicationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ConversationScalarFieldEnum = {
+  id: 'id',
+  user1Id: 'user1Id',
+  user2Id: 'user2Id',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ChatMessageScalarFieldEnum = {
+  id: 'id',
+  senderId: 'senderId',
+  receiverId: 'receiverId',
+  message: 'message',
+  createdAt: 'createdAt',
+  conversationId: 'conversationId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -179,7 +195,9 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Tutor: 'Tutor',
   Tuition: 'Tuition',
-  TuitionApplication: 'TuitionApplication'
+  TuitionApplication: 'TuitionApplication',
+  Conversation: 'Conversation',
+  ChatMessage: 'ChatMessage'
 };
 
 /**

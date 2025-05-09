@@ -21,6 +21,9 @@ export async function POST(req: NextRequest) {
         const tuition=await prisma.tuition.findFirst({
             where:{
                 id:Number(id)
+            },
+            include:{
+                applications:true
             }
         })
 

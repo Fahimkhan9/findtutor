@@ -2,7 +2,7 @@
   "name": "findtutor",
   "version": "0.1.0",
   "private": true,
-   "scripts": {
+  "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -11,12 +11,16 @@
   "dependencies": {
     "@clerk/nextjs": "^6.18.5",
     "@prisma/client": "^6.7.0",
+    "@talkjs/react": "^0.1.11",
     "axios": "^1.9.0",
     "cloudinary": "^2.6.1",
+    "clsx": "^2.1.1",
     "daisyui": "^5.0.35",
     "framer-motion": "^12.9.4",
     "next": "15.3.1",
     "next-cloudinary": "^6.16.0",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.2",

@@ -28,6 +28,7 @@ export default function TutorProfilePage() {
   const [tutorInfo, setTutorInfo] = useState(null);
   const [isTutorInfoLoading, setIsTutorInfoLoading] = useState(false);
   const [tuitionApplications,setTuitionApplications]=useState([])
+  const [isCreatingConversation,setISCreatingConversation]=useState(false)
   const { register, handleSubmit,reset,control } = useForm<FormData>();
   
   useEffect(() => {
@@ -142,6 +143,24 @@ const router=useRouter()
   const removeSubject = (index) => {
     setSubjects(subjects.filter((_, i) => i !== index));
   };
+  const handleConversationCreate=async (teacherUserid:any)=>{
+    try {
+        setISCreatingConversation(true)
+        const data={
+            otherUserId:teacherUserid
+        }
+        
+        
+        const res=await axios.post('/api/chat/conversations/create',data)
+        console.log(res.data);
+        router.push('/chat')
+    } catch (error) {
+        console.log(error);
+        
+    }finally{
+setISCreatingConversation(false)
+    }
+}
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
@@ -166,6 +185,7 @@ const router=useRouter()
         <th>Status</th>
         <th>Tuition Description</th>
         <th>Student Email</th>
+        <th>Message student</th>
 
       </tr>
     </thead>
@@ -173,13 +193,16 @@ const router=useRouter()
    
    
       {
-        tuitionApplications?.length>0 && tuitionApplications.map(i=>(<tr className="hover:bg-base-300">
+        tuitionApplications?.length>0 && tuitionApplications.map(i=>(<tr key={i?.id} className="hover:bg-base-300">
         
           <td>{i?.message}</td>
           <td>{i?.status}</td>
           <td>{i?.tuition?.description}</td>
           <td>{i?.tuition?.postedBy?.email}</td>
-
+<td><button disabled={isCreatingConversation} onClick={()=>handleConversationCreate(i?.tuition?.postedById)} className="btn">
+  {
+    isCreatingConversation ? "Creating" : "Message"
+  }</button></td>
         </tr>))
       }
      

@@ -1,5 +1,6 @@
 'use client'
 import ProfileSidebar from "@/components/ProfileSidebar";
+import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -296,8 +297,11 @@ export default function TutorProfileInputCard() {
 
 const Modal = (props) => {
     console.log(props);
+    const {user}=useUser()
+    const router=useRouter()
     const { currentModalDetails } = props
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isCreatingConversation,setISCreatingConversation]=useState(false)
     const handleStatus = async (applicationId:any) => {
         try {
             setIsSubmitting(true)
@@ -311,6 +315,27 @@ const Modal = (props) => {
 
         } finally {
             setIsSubmitting(false)
+        }
+    }
+    const handleConversationCreate=async (teacherUserid:any)=>{
+        try {
+            setISCreatingConversation(true)
+            const data={
+                receiverId:teacherUserid,
+                message:`Hello,i want to talk to you for further information.You have requested for my post.`
+            }
+            
+            const res=await axios.post('/api/chat/messages/create',data)
+            console.log(res.data);
+            if(res.data?.code==='EXISTS') {
+                router.push('/chat')
+            }
+                router.push('/chat')
+        } catch (error) {
+            console.log(error);
+            
+        }finally{
+setISCreatingConversation(false)
         }
     }
     return (
@@ -330,6 +355,8 @@ const Modal = (props) => {
                                 <th>Job</th>
                                 <th>Teacher Email</th>
                                 <th>Teacher Profile</th>
+                                <th>Chat</th>
+
                                 <th>Accept</th>
 
 
@@ -350,6 +377,7 @@ const Modal = (props) => {
                                                 <Link href={`/${i?.tutor?.email}`}>Profile</Link>
                                             </button>
                                         </td>
+                                        <td><button onClick={()=>handleConversationCreate(i?.tutor?.userId)} className="btn">Chat</button></td>
                                         <td><button disabled={isSubmitting} className="btn" onClick={() => handleStatus(i?.id)}>Accept</button></td>
                                     </tr>
                                 ))
