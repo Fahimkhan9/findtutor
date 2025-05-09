@@ -1,7 +1,7 @@
 // CustomProfilePage.tsx
 'use client'
 import { useUser } from "@clerk/clerk-react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import {  SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import ProfileSidebar from "@/components/ProfileSidebar";
 import axios from "axios";
@@ -9,7 +9,7 @@ import { Slide, toast } from "react-toastify";
 import { CldVideoPlayer } from 'next-cloudinary';
 import 'next-cloudinary/dist/cld-video-player.css';
 import { useRouter } from "next/navigation";
-import { FaEye } from "react-icons/fa";
+
 type FormData = {
   institution: string;
   subjects: string;

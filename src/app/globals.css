@@ -1,4 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui"{
-  themes: nord,dracula --default --prefersdark;
+  themes: nord,dim --default --prefersdark;
+}
+#publicprofileinput::placeholder{
+  color: #fff;
 }

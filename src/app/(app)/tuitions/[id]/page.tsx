@@ -5,33 +5,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { use, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
-const tuitions = [
-  {
-    id: 1,
-    location: 'Dhanmondi, Dhaka',
-    studentClass: 'Class 9',
-    description: 'Looking for an experienced tutor for Science and Math, 3 days a week.',
-    mode: 'Offline',
-    salary: '৳5,000/month',
-    user: {
-      name: 'Hasib Rahman',
-      avatar: 'https://i.pravatar.cc/40?img=3',
-    },
-  },
-  {
-    id: 2,
-    location: 'Gulshan, Dhaka',
-    studentClass: 'Class 7',
-    description: 'Need help with English and Bangla grammar.',
-    mode: 'Online',
-    salary: '৳4,000/month',
-    user: {
-      name: 'Nusrat Jahan',
-      avatar: 'https://i.pravatar.cc/40?img=5',
-    },
-  },
-  // More entries...
-];
+
 function TuitionDetailsPage({  params }: { params: Promise<{ id: string }> }) {
   const [isTuitionLoading, setIsTuitionLoading] = useState(false)
   const [tuitions, setTuitions] = useState({})

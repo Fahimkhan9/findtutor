@@ -19,11 +19,12 @@ function ProfileSidebar() {
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay">Dashboard</label>
                     <ul className="menu bg-base-200 text-base-content min-h-full w-40 p-4">
                         {/* Sidebar content here */}
-                        <li className='link text-lg hover:bg-accent hover:text-accent-content bg-base-500'><Link href='/dashboard/tutor'>Teacher</Link>
+                        <li className='link text-lg hover:bg-accent hover:text-accent-content bg-base-500'><Link href='/tuitions'>Tuitions</Link>
                         </li>
+                       
                         <li className='link text-lg hover:bg-accent hover:text-accent-content bg-base-500'><Link href='/dashboard/student'>student</Link>
                         </li>
-                        <li className='link text-lg hover:bg-accent hover:text-accent-content bg-base-500'><Link href='/tuitions'>Tuitions</Link>
+                        <li className='link text-lg hover:bg-accent hover:text-accent-content bg-base-500'><Link href='/dashboard/tutor'>Teacher</Link>
                         </li>
                     </ul>
                 </div>
