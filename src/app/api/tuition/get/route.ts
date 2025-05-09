@@ -6,11 +6,7 @@ const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
   try {
-    const { userId } = await getAuth(req);
-    if (!userId) {
-      return NextResponse.json({ msg: "Unauthorized" }, { status: 401 });
-    }
-
+ 
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get("page") || "1", 10);
     const limit = parseInt(url.searchParams.get("limit") || "10", 10);
@@ -47,6 +43,7 @@ export async function GET(req: NextRequest) {
       };
     });
    
+    console.log(tuitionWithUser);
     
     return NextResponse.json({
       tuitions: tuitionWithUser,

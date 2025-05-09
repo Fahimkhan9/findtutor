@@ -30,6 +30,9 @@ export async function GET(req: NextRequest) {
         orderBy: { createdAt: 'desc' },
         take: limit,
         skip,
+        include:{
+          applications:true
+        }
       }),
       prisma.tuition.count({
         where: {

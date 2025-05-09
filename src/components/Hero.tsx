@@ -135,6 +135,11 @@ export default function Hero() {
           It only takes a minute to sign up.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Link href='/tuitions' role='button'>
+          <button className="btn bg-primary text-primary-content rounded-lg shadow-md hover:scale-105 transition duration-300">
+           Tuitions
+          </button>
+          </Link>
           <Link href='/dashboard/student' role='button'>
           <button className="btn bg-primary text-primary-content rounded-lg shadow-md hover:scale-105 transition duration-300">
             Join as Student

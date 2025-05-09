@@ -1,3 +1,5 @@
+'use client'
+import { useAuth } from '@clerk/nextjs';
 import Link from 'next/link';
 import React from 'react'
 
@@ -5,7 +7,7 @@ function TuitionCard({tuition,single}) {
     const modeBadgeClass = tuition.mode === 'Offline'
     ? 'badge badge-outline badge-success'
     : 'badge badge-outline badge-info';
- 
+  const {isSignedIn}=useAuth()
     
   return (
     <div className="card w-full max-w-sm bg-base-100 shadow-xl border">
@@ -46,11 +48,13 @@ function TuitionCard({tuition,single}) {
 </div>
       <div className="card-actions justify-between mt-4">
         <div className="p-2 rounded-lg bg-base-200 text-white">{tuition?.applications?.length} Tutors Requested</div>
-      {!single &&   <button className="btn py-4 btn-sm btn-primary">
+      <div className='tooltip' data-tip='Sign in to apply'>
+      {!single &&   <button disabled={!isSignedIn} className="btn py-4 btn-sm btn-primary">
           <Link href={`/tuitions/${tuition.id}`}> Apply
           </Link>
          
           </button>}
+      </div>
       </div>
      
     </div>

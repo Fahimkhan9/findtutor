@@ -12,21 +12,23 @@ function TuitionPage() {
   const [isSearhcing,setIsSearching]=useState(false)
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  useEffect(()=>{
-   const fetchTuitions=async ()=>{
-    try {
-      setIsTuitionLoading(true)
-      const res=await axios.get(`/api/tuition/get`)
-      setTuitions(res.data.tuitions)
-    } catch (error) {
-      console.log(error);
+  // useEffect(()=>{
+  //  const fetchTuitions=async ()=>{
+  //   try {
+  //     setIsTuitionLoading(true)
+  //     const res=await axios.get(`/api/tuition/get`)
+  //     console.log(res.data);
       
-    }finally{
-      setIsTuitionLoading(false)
-    }
-   }
-   fetchTuitions()
-  },[])
+  //     setTuitions(res.data.tuitions)
+  //   } catch (error) {
+  //     console.log(error);
+      
+  //   }finally{
+  //     setIsTuitionLoading(false)
+  //   }
+  //  }
+  //  fetchTuitions()
+  // },[])
   const handleSearch=async (filters)=>{
     try {
       setIsSearching(true)
@@ -71,11 +73,13 @@ function TuitionPage() {
         isSearhcing={isSearhcing}
          onSearch={handleSearch}
         />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-          {tuitions.map(tuition => (
-        <TuitionCard key={tuition.id} tuition={tuition} single={false} />
-      ))}
-          </div>
+      {
+        isSearhcing ? <span className="loading loading-lg"></span>:<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        {tuitions?.map(tuition => (
+      <TuitionCard key={tuition?.id} tuition={tuition} single={false} />
+    ))}
+        </div>
+      }
           {/* Pagination */}
       <div className="join flex justify-center mt-6">
         <button
