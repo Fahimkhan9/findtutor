@@ -9,7 +9,7 @@ import { Slide, toast } from "react-toastify";
 import { CldVideoPlayer } from 'next-cloudinary';
 import 'next-cloudinary/dist/cld-video-player.css';
 import { useRouter } from "next/navigation";
-
+import { FaEye } from "react-icons/fa";
 type FormData = {
   institution: string;
   subjects: string;
@@ -37,7 +37,7 @@ export default function TutorProfilePage() {
         setIsTutorInfoLoading(true);
         const res = await axios.get('/api/tutor/get')
         const tuitions=await axios.get(`/api/tuition-application/getbytutor?tutorId=${res.data.tutor?.id}`)
-        console.log(tuitions.data);
+    
         setTuitionApplications(tuitions.data.applications)
         setTutorInfo(res.data.tutor)
         
@@ -139,6 +139,7 @@ const router=useRouter()
       setInputValue('');
     }
   };
+ 
 
   const removeSubject = (index) => {
     setSubjects(subjects.filter((_, i) => i !== index));
@@ -147,13 +148,13 @@ const router=useRouter()
     try {
         setISCreatingConversation(true)
         const data={
-            otherUserId:teacherUserid
-        }
-        
-        
-        const res=await axios.post('/api/chat/conversations/create',data)
-        console.log(res.data);
-        router.push('/chat')
+          receiverId:teacherUserid,
+          message:`Hello,i want to talk to you for further information.I have requested for your tuition post.`
+      }
+      
+      const res=await axios.post('/api/chat/messages/create',data)
+      
+        router.push('/conversations')
     } catch (error) {
         console.log(error);
         
@@ -199,7 +200,7 @@ setISCreatingConversation(false)
           <td>{i?.status}</td>
           <td>{i?.tuition?.description}</td>
           <td>{i?.tuition?.postedBy?.email}</td>
-<td><button disabled={isCreatingConversation} onClick={()=>handleConversationCreate(i?.tuition?.postedById)} className="btn">
+<td><button disabled={isCreatingConversation} onClick={()=>handleConversationCreate(i?.tuition?.postedById)} className="btn btn-accent">
   {
     isCreatingConversation ? "Creating" : "Message"
   }</button></td>
@@ -288,6 +289,7 @@ setISCreatingConversation(false)
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={handleKeyDown}
+                   
                     placeholder="Type and press Enter to add"
                     className="input input-bordered my-2"
                   />

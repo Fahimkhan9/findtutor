@@ -5,7 +5,7 @@ function TuitionCard({tuition,single}) {
     const modeBadgeClass = tuition.mode === 'Offline'
     ? 'badge badge-outline badge-success'
     : 'badge badge-outline badge-info';
-    console.log(tuition);
+ 
     
   return (
     <div className="card w-full max-w-sm bg-base-100 shadow-xl border">

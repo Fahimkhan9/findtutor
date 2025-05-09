@@ -38,7 +38,7 @@ function TuitionDetailsPage({  params }: { params: Promise<{ id: string }> }) {
   const [tutorProfile, setTutorProfile] = useState(null);
   const {user}=useUser()
   const { id } = use(params)
-  console.log(id);
+
   const router=useRouter()
   useEffect(() => {
     const load = async () => {
@@ -72,9 +72,9 @@ function TuitionDetailsPage({  params }: { params: Promise<{ id: string }> }) {
             message:values.message,
             tuitionId:Number(id)
           }
-          console.log(data);
+    
          const res= await axios.post('/api/tuition-application/create',data)
-         console.log(res.data);
+        
          router.push('/dashboard/tutor')
         }
         

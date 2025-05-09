@@ -33,18 +33,14 @@ export default function ProfileCard() {
   }
 
   const onSubmit = async (data: FormValues) => {
-    console.log("Form data:", {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      image: data.profileImage?.[0],
-    });
+  
     try {
       const res=await user?.update({
         firstName: data.firstName,
         lastName: data.lastName,
         username:`${data.firstName}${data.lastName}`,
       })
-      console.log(res);
+ 
       
       toast.success('Profile Updated Succesfully', {
         position: "top-right",

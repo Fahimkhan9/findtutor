@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
           : null,
       };
     });
-    console.log(tuitionWithUser);
+   
     
     return NextResponse.json({
       tuitions: tuitionWithUser,

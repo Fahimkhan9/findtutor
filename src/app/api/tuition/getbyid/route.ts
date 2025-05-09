@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         
         const client=await clerkClient()
         const users = (await client.users.getUserList({ userId: tuition?.postedById }))
-        console.log(users);
+   
         const res={
           user:{
             img:users.data[0].imageUrl,
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
           }
         }
         const tuitionwithuser={...tuition,...res}
-        console.log(tuitionwithuser);
+  
         
           
         return NextResponse.json({tuition:tuitionwithuser,success:true}, { status: 200 })

@@ -22,13 +22,7 @@ export async function POST(req: NextRequest) {
             salary,
             description
         } = await req.json()
-        console.log(location,
-            district,
-            mode,
-            year,
-            subjects,
-            salary,
-            description);
+    
         
         if ([location,
             district,

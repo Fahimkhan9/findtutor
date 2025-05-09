@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
             },
           }
       });
-    console.log(enrichedApplications);
+
     
     return NextResponse.json({
       count: enrichedApplications.length,

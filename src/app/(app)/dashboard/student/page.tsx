@@ -6,7 +6,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FaEye } from "react-icons/fa";
 import { Slide, toast } from "react-toastify";
+import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 
 
 type FormData = {
@@ -39,10 +41,10 @@ export default function TutorProfileInputCard() {
                 salary: data.salary,
                 description: data.description
             }
-            console.log(values);
+           
 
             const res = await axios.post('/api/tuition/create', values)
-            console.log(res.data);
+         
             toast.success('Posted successfully!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -80,7 +82,7 @@ export default function TutorProfileInputCard() {
                 setIsTuitionLoading(true)
                 const res = await axios.get('/api/tuition/getbyuser')
                 setTuitions(res.data.tuitions)
-                console.log(res.data.tuitions);
+                
 
             } catch (error) {
 
@@ -126,7 +128,6 @@ export default function TutorProfileInputCard() {
                                     </thead>
                                     <tbody>
 
-                                        {/* row 2 */}
                                         {
                                             tuitions.length > 0 && tuitions.map(i => (
                                                 <tr key={i?.id} className="hover:bg-base-300">
@@ -134,8 +135,10 @@ export default function TutorProfileInputCard() {
                                                     <td>{i?.description}</td>
                                                     <td>{i?.salary}</td>
                                                     <td>{i?.year}</td>
-                                                    <td >
-                                                        <button onClick={() => showModal(i)} className="btn bg-primary text-primary-content">See</button>
+                                                    <td>
+                                                        <button onClick={() => showModal(i)} className="btn btn-secondary">
+                                                            <FaEye/>
+                                                        </button>
 
 
                                                     </td>
@@ -296,7 +299,7 @@ export default function TutorProfileInputCard() {
 }
 
 const Modal = (props) => {
-    console.log(props);
+    
     const {user}=useUser()
     const router=useRouter()
     const { currentModalDetails } = props
@@ -309,7 +312,7 @@ const Modal = (props) => {
                 applicationId
             }
             const res = await axios.patch('/api/tuition-application/accept',data)
-            console.log(res.data);
+           
 
         } catch (error) {
 
@@ -326,11 +329,11 @@ const Modal = (props) => {
             }
             
             const res=await axios.post('/api/chat/messages/create',data)
-            console.log(res.data);
+         
             if(res.data?.code==='EXISTS') {
-                router.push('/chat')
+                router.push('/conversations')
             }
-                router.push('/chat')
+                router.push('/conversations')
         } catch (error) {
             console.log(error);
             
@@ -373,12 +376,14 @@ setISCreatingConversation(false)
                                         <td>{i?.status}</td>
                                         <td>{i?.tutor?.email}</td>
                                         <td>
-                                            <button className="btn">
+                                            <button className="btn btn-secondary">
                                                 <Link href={`/${i?.tutor?.email}`}>Profile</Link>
                                             </button>
                                         </td>
-                                        <td><button onClick={()=>handleConversationCreate(i?.tutor?.userId)} className="btn">Chat</button></td>
-                                        <td><button disabled={isSubmitting} className="btn" onClick={() => handleStatus(i?.id)}>Accept</button></td>
+                                        <td><button disabled={isCreatingConversation} onClick={()=>handleConversationCreate(i?.tutor?.userId)} className="btn btn-secondary">
+                                            <IoChatbubbleEllipsesSharp/>
+                                            </button></td>
+                                        <td><button disabled={isSubmitting} className="btn btn-secondary" onClick={() => handleStatus(i?.id)}>Accept</button></td>
                                     </tr>
                                 ))
                             }

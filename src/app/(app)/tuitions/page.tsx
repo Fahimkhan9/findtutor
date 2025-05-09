@@ -31,10 +31,10 @@ function TuitionPage() {
     try {
       setIsSearching(true)
       const query = new URLSearchParams(filters).toString();
-      console.log(query);
+   
       
           const res=await axios.get(`/api/tuition/search?${query}`)
-          console.log(res.data);
+          
           setTuitions(res.data.tuitions)
     } catch (error) {
       console.log(error);

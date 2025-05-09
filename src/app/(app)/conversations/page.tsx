@@ -12,7 +12,7 @@ function ConversationsPage() {
                 setISConversationLoading(true)
                 const res = await axios.get('/api/chat/conversations')
 
-                console.log(res.data);
+             
                 setConversations(res.data.conversations)
             } catch (error) {
                 console.log(error);
