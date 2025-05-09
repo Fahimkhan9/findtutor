@@ -4,8 +4,6 @@
 
 
 
-## Link
- https://progressly-gamma.vercel.app/
 
 
 

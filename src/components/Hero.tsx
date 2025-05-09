@@ -36,12 +36,16 @@ export default function Hero() {
             connects the right people—fast.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="btn bg-primary text-primary-content rounded-lg shadow-md hover:scale-105 transition duration-300">
-              <Link href='/dashboard/student'>Find a Tutor</Link>
-            </button>
-            <button className="btn bg-accent text-accent-content rounded-lg shadow-md hover:scale-105 transition duration-300">
-            <Link href='/dashboard/tutor'>  Become a Tutor</Link>
-            </button>
+          
+              <Link role='button' href='/dashboard/student'>
+              <button className="btn bg-primary text-primary-content rounded-lg shadow-md hover:scale-105 transition duration-300">
+              Find a Tutor
+              </button>
+              </Link>
+          
+           
+            <Link href='/dashboard/tutor' role='button'> <button className="btn bg-accent text-accent-content rounded-lg shadow-md hover:scale-105 transition duration-300">  Become a Tutor </button></Link>
+           
           </div>
         </motion.div>
 
@@ -131,12 +135,17 @@ export default function Hero() {
           It only takes a minute to sign up.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href='/dashboard/student' role='button'>
           <button className="btn bg-primary text-primary-content rounded-lg shadow-md hover:scale-105 transition duration-300">
             Join as Student
           </button>
-          <button className="btn bg-primary text-primary-content rounded-lg shadow-md hover:scale-105 transition duration-300">
+          </Link>
+     <Link href='/dashboard/tutor' role='button'>
+     <button className="btn bg-primary text-primary-content rounded-lg shadow-md hover:scale-105 transition duration-300">
             Join as Tutor
           </button>
+     </Link>
+        
         </div>
       </motion.div>
     </section>

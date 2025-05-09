@@ -4,7 +4,7 @@ import React, { use, useEffect, useState } from 'react'
 import Pusher from 'pusher-js';
 import clsx from "clsx";
 import { useUser } from '@clerk/nextjs';
-export const pusherClient = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY!, {
+ const pusherClient = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY!, {
   cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
 });
 function ConvoMessagePage({  params }: { params: Promise<{ id: string }> }) {
